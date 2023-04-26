@@ -15,7 +15,6 @@ class CarServiceTest {
     CarRepo carRepo = mock(CarRepo.class);
     CarService carService = new CarService(carRepo);
 
-
     @Test
     void getAllCars_ReturnEmptyList() {
         // GIVEN
