@@ -54,6 +54,7 @@
             <version>4.6.2</version>
         </dependency>
     </dependencies>
+    <packaging>jar</packaging>
     <build>
         <finalName>app</finalName>
         <plugins>
