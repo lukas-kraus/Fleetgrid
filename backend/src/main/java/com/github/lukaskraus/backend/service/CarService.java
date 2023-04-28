@@ -17,6 +17,10 @@ public class CarService {
         return carRepo.findAll();
     }
 
+    public Car getCarById(String id) {
+        return carRepo.findById(id).orElseThrow();
+    }
+
     public Car addCar(Car car) {
         return carRepo.save(car);
     }
