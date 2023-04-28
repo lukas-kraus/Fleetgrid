@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -62,8 +63,9 @@ class CarIntegrationTest {
                 .andExpect(status().isOk());
     }
 
+    @DirtiesContext
     @Test
-    void deleteCar_expectDeletion() throws Exception {
+    void deleteCar_verifyDeletion() throws Exception {
         mockMvc.perform(delete("/api/cars/999"))
                 .andExpect(status().isOk());
 
@@ -73,5 +75,4 @@ class CarIntegrationTest {
                         []
                         """));
     }
-
 }
