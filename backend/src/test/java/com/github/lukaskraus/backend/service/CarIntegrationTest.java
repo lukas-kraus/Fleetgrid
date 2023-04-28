@@ -11,8 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -32,7 +31,7 @@ class CarIntegrationTest {
     }
 
     @Test
-    void getAllCars_ExpectAllCars() throws Exception {
+    void getAllCars_expectAllCars() throws Exception {
         mockMvc.perform(get("/api/cars"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
@@ -47,7 +46,7 @@ class CarIntegrationTest {
     }
 
     @Test
-    void AddCar_SavesCar() throws Exception {
+    void addCar_savesCar() throws Exception {
         mockMvc.perform(post("/api/cars")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -62,4 +61,17 @@ class CarIntegrationTest {
                 )
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void deleteCar_expectDeletion() throws Exception {
+        mockMvc.perform(delete("/api/cars/999"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/cars"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        []
+                        """));
+    }
+
 }

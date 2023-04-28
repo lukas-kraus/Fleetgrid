@@ -20,4 +20,8 @@ public class CarService {
     public Car addCar(Car car) {
         return carRepo.save(car);
     }
+
+    public void deleteCar(String id) {
+        carRepo.deleteById(id);
+    }
 }

@@ -23,4 +23,9 @@ public class CarController {
     Car addCar(@RequestBody Car car) {
         return carService.addCar(car);
     }
+
+    @DeleteMapping("{id}")
+    void deleteCar(@PathVariable String id) {
+        carService.deleteCar(id);
+    }
 }
