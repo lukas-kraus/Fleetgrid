@@ -5,6 +5,7 @@ import {Car, NewCar} from "./model/Car";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import CarGallery from "./components/CarGallery";
 import AddCar from "./components/AddCar";
+import CarDetails from "./components/CarDetails";
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
                 <Routes>
                     <Route path="/cars" element={<CarGallery cars={cars}/>}/>
                     <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
+                    <Route path="/cars/:id" element={<CarDetails/>}/>
                 </Routes>
             </BrowserRouter>
         </>

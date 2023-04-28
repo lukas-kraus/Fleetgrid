@@ -75,4 +75,20 @@ class CarIntegrationTest {
                         []
                         """));
     }
+
+    @DirtiesContext
+    @Test
+    void getCarById_ExpectCar() throws Exception {
+        mockMvc.perform(get("/api/cars/999"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        {
+                        "id": "999",
+                        "model": "Käfer",
+                        "license_plate": "A-BC-123",
+                        "color": "black",
+                        "status": "PARKED"
+                        }
+                        """));
+    }
 }
