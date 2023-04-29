@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -61,5 +62,21 @@ class CarIntegrationTest {
                                 """)
                 )
                 .andExpect(status().isOk());
+    }
+
+    @DirtiesContext
+    @Test
+    void getCarById_ExpectCar() throws Exception {
+        mockMvc.perform(get("/api/cars/999"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        {
+                        "id": "999",
+                        "model": "Käfer",
+                        "license_plate": "A-BC-123",
+                        "color": "black",
+                        "status": "PARKED"
+                        }
+                        """));
     }
 }

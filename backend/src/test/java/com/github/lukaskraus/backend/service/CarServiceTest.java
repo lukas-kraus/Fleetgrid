@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -38,5 +39,18 @@ class CarServiceTest {
         // THEN
         verify(carRepo).save(actual);
         assertEquals(actual, expected);
+    }
+
+    @Test
+    void getCarById_ExpectCarById() {
+        // GIVEN
+        String id = "12345";
+        Car expected = new Car("12345", "Käfer", "A-BC-123", "black", Status.PARKED);
+        when(carRepo.findById(id)).thenReturn(Optional.of(expected));
+        // WHEN
+        Car actual = carService.getCarById(id);
+        // THEN
+        verify(carRepo).findById(id);
+        assertEquals(expected, actual);
     }
 }
