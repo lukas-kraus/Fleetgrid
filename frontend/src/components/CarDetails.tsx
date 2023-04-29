@@ -1,13 +1,17 @@
 import {Car} from "../model/Car";
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 
-export default function CarDetails() {
+type Props = {
+    deleteCar: (id: string) => void;
+};
+
+export default function CarDetails(props: Props) {
 
     const [car, setCar] = useState<Car>()
     const {id} = useParams<{ id: string }>()
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (id) {
@@ -15,6 +19,13 @@ export default function CarDetails() {
         }
         //eslint-disable-next-line
     }, [])
+
+    function onDeleteClick() {
+        if (car) {
+            props.deleteCar(car.id);
+            navigate("/cars");
+        }
+    }
 
     function loadCarById(id: string) {
         axios.get('/api/cars/' + id)
@@ -37,6 +48,8 @@ export default function CarDetails() {
                             <li><b>Color:</b> {car.color}</li>
                             <li><b>ID:</b> {car.id}</li>
                         </ul>
+                        <button onClick={onDeleteClick}>Delete</button>
+
                     </>
                     :
                     <h1>Loading ....</h1>
