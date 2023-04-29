@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
@@ -18,7 +19,7 @@ public class CarService {
     }
 
     public Car getCarById(String id) {
-        return carRepo.findById(id).orElseThrow();
+        return carRepo.findById(id).orElseThrow(() -> new NoSuchElementException("Car with id " + id + " not found"));
     }
 
     public Car addCar(Car car) {
