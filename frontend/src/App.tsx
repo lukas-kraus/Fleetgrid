@@ -29,6 +29,14 @@ function App() {
             .catch(() => console.error("Couldn't add new car"));
     }
 
+    function deleteCar(id: string) {
+        axios.delete("/api/cars/" + id)
+            .then(() => {
+                setCars(cars.filter((car) => car.id !== id))
+            })
+            .catch(() => console.error("Couldn't delete car"));
+    }
+
     return (
         <>
             <h1>Fleetgrid</h1>
@@ -36,7 +44,7 @@ function App() {
                 <Routes>
                     <Route path="/cars" element={<CarGallery cars={cars}/>}/>
                     <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
-                    <Route path="/cars/:id" element={<CarDetails/>}/>
+                    <Route path="/cars/:id" element={<CarDetails deleteCar={deleteCar}/>}/>
                 </Routes>
             </BrowserRouter>
         </>

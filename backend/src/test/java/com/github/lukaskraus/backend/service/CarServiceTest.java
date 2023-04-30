@@ -30,7 +30,7 @@ class CarServiceTest {
     }
 
     @Test
-    void addCar() {
+    void addCar_verifyAddition() {
         // GIVEN
         Car actual = new Car("567", "ID.3", "D-EF-365", "yellow", Status.CHARGING);
         when(carRepo.save(actual)).thenReturn(actual);
@@ -52,5 +52,15 @@ class CarServiceTest {
         // THEN
         verify(carRepo).findById(id);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void deleteCar_verifyDeletion() {
+        // GIVEN
+        String id = "999";
+        // WHEN
+        carService.deleteCar(id);
+        // THEN
+        verify(carRepo).deleteById(id);
     }
 }
