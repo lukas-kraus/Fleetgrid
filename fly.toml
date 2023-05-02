@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for fleetgrid on 2023-04-27T15:52:06+02:00
+# fly.toml app configuration file generated for fleetgrid on 2023-05-02T12:10:44+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -9,7 +9,6 @@ primary_region = "ams"
 [http_service]
 internal_port = 8080
 force_https = true
-auto_stop_machines = true
 auto_start_machines = true
 
 [checks]
