@@ -29,6 +29,20 @@ function App() {
             .catch(() => console.error("Couldn't add new car"));
     }
 
+    function editCar(car: Car) {
+        axios.put(`/api/cars/${car.id}`, car)
+            .then((putCarResponse) => {
+                setCars(cars.map(currentCar => {
+                    if (currentCar.id === car.id) {
+                        return putCarResponse.data
+                    } else {
+                        return currentCar
+                    }
+                }))
+            })
+            .catch(() => console.error("Couldn't update car"));
+    }
+
     function deleteCar(id: string) {
         axios.delete("/api/cars/" + id)
             .then(() => {
@@ -39,12 +53,11 @@ function App() {
 
     return (
         <>
-            <h1>Fleetgrid</h1>
             <BrowserRouter>
                 <Routes>
                     <Route path="/cars" element={<CarGallery cars={cars}/>}/>
                     <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
-                    <Route path="/cars/:id" element={<CarDetails deleteCar={deleteCar}/>}/>
+                    <Route path="/cars/:id" element={<CarDetails editCar={editCar} deleteCar={deleteCar}/>}/>
                 </Routes>
             </BrowserRouter>
         </>

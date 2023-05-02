@@ -4,6 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 
 type Props = {
+    editCar: (car: Car) => void;
     deleteCar: (id: string) => void;
 };
 
@@ -48,8 +49,8 @@ export default function CarDetails(props: Props) {
                             <li><b>Color:</b> {car.color}</li>
                             <li><b>ID:</b> {car.id}</li>
                         </ul>
+                        <button>Edit</button>
                         <button onClick={onDeleteClick}>Delete</button>
-
                     </>
                     :
                     <h1>Loading ....</h1>
