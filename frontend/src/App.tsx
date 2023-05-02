@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import CarGallery from "./components/CarGallery";
 import AddCar from "./components/AddCar";
 import CarDetails from "./components/CarDetails";
+import Header from "./components/Header";
 
 function App() {
 
@@ -39,8 +40,8 @@ function App() {
 
     return (
         <>
-            <h1>Fleetgrid</h1>
             <BrowserRouter>
+                <Header/>
                 <Routes>
                     <Route path="/cars" element={<CarGallery cars={cars}/>}/>
                     <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
