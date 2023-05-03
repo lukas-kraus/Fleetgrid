@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import CarGallery from "./components/CarGallery";
 import AddCar from "./components/AddCar";
 import CarDetails from "./components/CarDetails";
+import EditCar from "./components/EditCar";
 
 function App() {
 
@@ -40,7 +41,7 @@ function App() {
                     }
                 }))
             })
-            .catch(() => console.error("Couldn't update car"));
+            .catch(console.error)
     }
 
     function deleteCar(id: string) {
@@ -57,7 +58,8 @@ function App() {
                 <Routes>
                     <Route path="/cars" element={<CarGallery cars={cars}/>}/>
                     <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
-                    <Route path="/cars/:id" element={<CarDetails editCar={editCar} deleteCar={deleteCar}/>}/>
+                    <Route path="/cars/:id" element={<CarDetails deleteCar={deleteCar}/>}/>
+                    <Route path="/cars/:id/edit" element={<EditCar editCar={editCar}/>}/>
                 </Routes>
             </BrowserRouter>
         </>
