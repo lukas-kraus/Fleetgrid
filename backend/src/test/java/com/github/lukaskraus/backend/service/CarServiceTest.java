@@ -63,4 +63,17 @@ class CarServiceTest {
         // THEN
         verify(carRepo).deleteById(id);
     }
+
+
+    @Test
+    void editCarById() {
+        // GIVEN
+        String id = "123567";
+        Car car = new Car("12345", "Käfer", "A-BC-123", "black", Status.PARKED);
+        when(carRepo.findById(id)).thenReturn(Optional.of(car));
+        // WHEN
+        carService.editCar(car);
+        // THEN
+        verify(carRepo).save(car);
+    }
 }

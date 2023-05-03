@@ -27,7 +27,7 @@ class CarIntegrationTest {
     CarRepo carRepo;
 
     @BeforeEach
-    void addRecipeToRepo() {
+    void addCarToRepo() {
         carRepo.save(new Car("999", "Käfer", "A-BC-123", "black", Status.PARKED));
     }
 
@@ -90,5 +90,40 @@ class CarIntegrationTest {
                         "status": "PARKED"
                         }
                         """));
+    }
+
+    @DirtiesContext
+    @Test
+    void editExistingCar_ExpectOk() throws Exception {
+        mockMvc.perform(put("/api/cars/567").
+                        contentType(MediaType.APPLICATION_JSON).
+                        content("""
+                                {
+                                    "id": "567",
+                                    "model": "ID.3 Pro",
+                                    "license_plate": "K-NW-315",
+                                    "color": "blue",
+                                    "status": "CHARGING"
+                                }
+                                """)).
+                andExpect(status().isOk());
+    }
+
+
+    @DirtiesContext
+    @Test
+    void editNonExistingCar_ExpectBadRequest() throws Exception {
+        mockMvc.perform(put("/api/cars/999999").
+                        contentType(MediaType.APPLICATION_JSON).
+                        content("""
+                                {
+                                    "id": "567",
+                                    "model": "ID.3 Pro",
+                                    "license_plate": "K-NW-315",
+                                    "color": "blue",
+                                    "status": "CHARGING"
+                                }
+                                """)).
+                andExpect(status().isBadRequest());
     }
 }
