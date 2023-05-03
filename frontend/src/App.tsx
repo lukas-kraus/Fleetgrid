@@ -7,6 +7,7 @@ import CarGallery from "./components/CarGallery";
 import AddCar from "./components/AddCar";
 import CarDetails from "./components/CarDetails";
 import EditCar from "./components/EditCar";
+import Header from "./components/Header";
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
     return (
         <>
             <BrowserRouter>
+                <Header/>
                 <Routes>
                     <Route path="/cars" element={<CarGallery cars={cars}/>}/>
                     <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
