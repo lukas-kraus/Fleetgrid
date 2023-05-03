@@ -1,10 +1,11 @@
 import {Car} from "../model/Car";
-import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import {wait} from "@testing-library/user-event/dist/utils";
+import './CarDetails.css';
 
 type Props = {
-    editCar: (car: Car) => void;
     deleteCar: (id: string) => void;
 };
 
@@ -18,15 +19,8 @@ export default function CarDetails(props: Props) {
         if (id) {
             loadCarById(id)
         }
-        //eslint-disable-next-line
+        // eslint-disable-next-line
     }, [])
-
-    function onDeleteClick() {
-        if (car) {
-            props.deleteCar(car.id);
-            navigate("/cars");
-        }
-    }
 
     function loadCarById(id: string) {
         axios.get('/api/cars/' + id)
@@ -38,23 +32,29 @@ export default function CarDetails(props: Props) {
             })
     }
 
+    function onDeleteClick() {
+        if (car) {
+            props.deleteCar(car.id);
+            wait(500).then(() => navigate("/cars"))
+        }
+    }
+
     return (
         <div>
-            {
-                car
-                    ? <>
-                        <h1>{car.model} ({car.status})</h1>
-                        <ul>
-                            <li><b>License plate:</b> {car.license_plate}</li>
-                            <li><b>Color:</b> {car.color}</li>
-                            <li><b>ID:</b> {car.id}</li>
-                        </ul>
-                        <button>Edit</button>
-                        <button onClick={onDeleteClick}>Delete</button>
-                    </>
-                    :
-                    <h1>Loading ....</h1>
-            }
+            {car ? (
+                <>
+                    <h1>{car.model} ({car.status})</h1>
+                    <ul>
+                        <li><b>License plate:</b> {car.license_plate}</li>
+                        <li><b>Color:</b> {car.color}</li>
+                        <li><b>ID:</b> {car.id}</li>
+                    </ul>
+                    <Link to={`/cars/${car.id}/edit`}>Edit</Link>
+                    <Link to="#" onClick={onDeleteClick}>Delete</Link>
+                </>
+            ) : (
+                <h1>Loading ...</h1>
+            )}
         </div>
     )
 }
