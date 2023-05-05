@@ -17,9 +17,11 @@ export default function Login(props: Props) {
 
         props.onLogin(username, password)
             .then(() => {
-                navigate("/cars")
+                navigate("/cars");
             })
-
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     return (
