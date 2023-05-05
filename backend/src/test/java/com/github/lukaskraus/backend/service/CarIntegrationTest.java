@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,6 +33,7 @@ class CarIntegrationTest {
         carRepo.save(new Car("999", "Käfer", "A-BC-123", "black", Status.PARKED));
     }
 
+    @WithMockUser
     @Test
     void getAllCars_expectAllCars() throws Exception {
         mockMvc.perform(get("/api/cars"))
@@ -46,6 +49,7 @@ class CarIntegrationTest {
                          """));
     }
 
+    @WithMockUser
     @Test
     void addCar_savesCar() throws Exception {
         mockMvc.perform(post("/api/cars")
@@ -59,14 +63,15 @@ class CarIntegrationTest {
                                     "status": "CHARGING"
                                 }
                                 """)
-                )
+                        .with(csrf()))
                 .andExpect(status().isOk());
     }
 
     @DirtiesContext
+    @WithMockUser
     @Test
     void deleteCar_verifyDeletion() throws Exception {
-        mockMvc.perform(delete("/api/cars/999"))
+        mockMvc.perform(delete("/api/cars/999").with(csrf()))
                 .andExpect(status().isOk());
 
         mockMvc.perform(get("/api/cars"))
@@ -77,9 +82,10 @@ class CarIntegrationTest {
     }
 
     @DirtiesContext
+    @WithMockUser
     @Test
     void getCarById_ExpectCar() throws Exception {
-        mockMvc.perform(get("/api/cars/999"))
+        mockMvc.perform(get("/api/cars/999").with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         {
@@ -93,6 +99,7 @@ class CarIntegrationTest {
     }
 
     @DirtiesContext
+    @WithMockUser
     @Test
     void editExistingCar_ExpectOk() throws Exception {
         mockMvc.perform(put("/api/cars/567").
@@ -105,12 +112,13 @@ class CarIntegrationTest {
                                     "color": "blue",
                                     "status": "CHARGING"
                                 }
-                                """)).
+                                """).with(csrf())).
                 andExpect(status().isOk());
     }
 
 
     @DirtiesContext
+    @WithMockUser
     @Test
     void editNonExistingCar_ExpectBadRequest() throws Exception {
         mockMvc.perform(put("/api/cars/999999").
@@ -123,7 +131,24 @@ class CarIntegrationTest {
                                     "color": "blue",
                                     "status": "CHARGING"
                                 }
-                                """)).
+                                """).with(csrf())).
                 andExpect(status().isBadRequest());
+    }
+
+    @DirtiesContext
+    @WithMockUser(username = "kevin")
+    @Test
+    void showUsernameKevin_WhenLoggedIn() throws Exception {
+        mockMvc.perform(get("/api/users/me"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("kevin"));
+    }
+
+    @DirtiesContext
+    @Test
+    void showAnonymousUser_WhenNotLoggedIn() throws Exception {
+        mockMvc.perform(get("/api/users/me"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("anonymousUser"));
     }
 }
