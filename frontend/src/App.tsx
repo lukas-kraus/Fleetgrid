@@ -8,9 +8,11 @@ import AddCar from "./components/AddCar";
 import CarDetails from "./components/CarDetails";
 import EditCar from "./components/EditCar";
 import Header from "./components/Header";
+import Login from "./components/Login";
+import useUser from "./hooks/useUser";
 
 function App() {
-
+    const {login} = useUser()
     const [cars, setCars] = useState<Car[]>([])
 
     useEffect(() => {
@@ -58,6 +60,7 @@ function App() {
             <BrowserRouter>
                 <Header/>
                 <Routes>
+                    <Route path="/login" element={<Login onLogin={login}/>}/>
                     <Route path="/cars" element={<CarGallery cars={cars}/>}/>
                     <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
                     <Route path="/cars/:id" element={<CarDetails deleteCar={deleteCar}/>}/>
