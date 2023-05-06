@@ -1,27 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    background: url("/public/background.jpg") no-repeat top;
     background-size: cover;
     padding: 2%;
+    background: #EEF3F7;
 }
 
 #root {
     background: #FFF;
+    padding: 30px;
     border-radius: 20px;
-    -webkit-box-shadow: 6px 6px 14px -5px rgba(0, 0, 0, 0.38);
-    -moz-box-shadow: 6px 6px 14px -5px rgba(0, 0, 0, 0.38);
-    box-shadow: 6px 6px 14px -5px rgba(0, 0, 0, 0.38);
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+main {
+    padding: 30px 10px 20px 10px;
 }
 
 a:link, a:visited {
     color: #000;
+    text-decoration: none;
+    transition: all 100ms linear 100ms;
 }

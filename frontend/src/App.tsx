@@ -10,6 +10,7 @@ import EditCar from "./components/EditCar";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import useUser from "./hooks/useUser";
+import Home from "./components/Home";
 
 function App() {
     const {login} = useUser()
@@ -59,13 +60,16 @@ function App() {
         <>
             <BrowserRouter>
                 <Header/>
-                <Routes>
-                    <Route path="/login" element={<Login onLogin={login}/>}/>
-                    <Route path="/cars" element={<CarGallery cars={cars}/>}/>
-                    <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
-                    <Route path="/cars/:id" element={<CarDetails deleteCar={deleteCar}/>}/>
-                    <Route path="/cars/:id/edit" element={<EditCar editCar={editCar}/>}/>
-                </Routes>
+                <main>
+                    <Routes>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/login" element={<Login onLogin={login}/>}/>
+                        <Route path="/cars" element={<CarGallery cars={cars}/>}/>
+                        <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
+                        <Route path="/cars/:id" element={<CarDetails deleteCar={deleteCar}/>}/>
+                        <Route path="/cars/:id/edit" element={<EditCar editCar={editCar}/>}/>
+                    </Routes>
+                </main>
             </BrowserRouter>
         </>
     );
