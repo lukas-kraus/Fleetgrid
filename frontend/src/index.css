@@ -44,3 +44,37 @@ h1 span {
 .right {
     float: right;
 }
+
+input, button, a.button-link {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 1em;
+    display: block;
+    width: 40%;
+    background: #F4F6F8;
+    padding: 20px;
+    margin: 10px 0 10px 0;
+    border: none;
+    border-radius: 10px;
+}
+
+button, a.button-link {
+    width: 43%;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    background: #253332;
+    color: #FFFFFF;
+    transition: all 100ms linear 100ms;
+}
+
+a.button-link {
+    width: 40%;
+    text-align: center;
+}
+
+button:hover, a.button-link:hover {
+    background: #253332;
+    color: #FFFFFF;
+}

@@ -18,6 +18,12 @@ header {
     padding-right: 50px;
 }
 
+header .seperator {
+    border-right: 1px solid #FFF;
+    height: 50px;
+    opacity: 0.7;
+}
+
 header a:link:first-child, header a:visited:first-child {
     margin-right: 20px;
 }
@@ -50,4 +56,14 @@ header .user a {
 
 header .user a span {
     padding-left: 10px;
+}
+
+header .logout {
+    overflow: hidden;
+    width: 0;
+    transition: all 500ms ease-in-out;
+}
+
+header .user:hover .logout {
+    width: 60px;
 }

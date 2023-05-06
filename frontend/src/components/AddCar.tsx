@@ -2,7 +2,6 @@ import {FormEvent, useState} from "react";
 import {NewCar} from "../model/Car";
 import {Link, useNavigate} from "react-router-dom";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import './AddCar.css';
 
 type AddCarProps = {
     addCar: (newCar: NewCar) => void

@@ -56,8 +56,8 @@ export default function CarDetails(props: Props) {
                         <li><b>Color:</b> {car.color}</li>
                         <li><b>ID:</b> {car.id}</li>
                     </ul>
-                    <Link to={`/cars/${car.id}/edit`}>Edit</Link>
-                    <Link to="#" onClick={onDeleteClick}>Delete</Link>
+                    <Link to={`/cars/${car.id}/edit`} className="button-link">Edit</Link>
+                    <Link to="#" onClick={onDeleteClick} className="button-link">Delete</Link>
                 </>
             ) : (
                 <h1>Loading ...</h1>

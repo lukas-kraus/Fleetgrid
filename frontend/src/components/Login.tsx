@@ -1,6 +1,5 @@
 import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import './AddCar.css';
 
 type Props = {
     onLogin: (username: string, password: string) => Promise<void>
