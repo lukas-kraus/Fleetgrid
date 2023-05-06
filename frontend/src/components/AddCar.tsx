@@ -1,6 +1,7 @@
 import {FormEvent, useState} from "react";
 import {NewCar} from "../model/Car";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import './AddCar.css';
 
 type AddCarProps = {
@@ -26,37 +27,46 @@ export default function AddCar(props: AddCarProps) {
     }
 
     return (
-        <form onSubmit={onSaveCar}>
-            <input type="text"
-                   value={license_plate}
-                   placeholder="License plate"
-                   required
-                   onChange={(event) => {
-                       setLicensePlate(event.target.value)
-                   }}/>
-            <input type="text"
-                   value={model}
-                   placeholder="Model"
-                   required
-                   onChange={(event) => {
-                       setModel(event.target.value)
-                   }}/>
-            <input type="text"
-                   value={color}
-                   placeholder="Color"
-                   required
-                   onChange={(event) => {
-                       setColor(event.target.value)
-                   }}/>
-            <input type="text"
-                   value={status}
-                   placeholder="Status"
-                   required
-                   onChange={(event) => {
-                       setStatus(event.target.value)
-                   }}/>
-            <button>Add Car</button>
-        </form>
+        <div>
+            <h1>
+                <span>
+                    <Link to="/cars">Cars</Link>
+                    <ArrowForwardIosIcon/>
+                </span>
+                Add Car
+            </h1>
+            <form onSubmit={onSaveCar}>
+                <input type="text"
+                       value={license_plate}
+                       placeholder="License plate"
+                       required
+                       onChange={(event) => {
+                           setLicensePlate(event.target.value)
+                       }}/>
+                <input type="text"
+                       value={model}
+                       placeholder="Model"
+                       required
+                       onChange={(event) => {
+                           setModel(event.target.value)
+                       }}/>
+                <input type="text"
+                       value={color}
+                       placeholder="Color"
+                       required
+                       onChange={(event) => {
+                           setColor(event.target.value)
+                       }}/>
+                <input type="text"
+                       value={status}
+                       placeholder="Status"
+                       required
+                       onChange={(event) => {
+                           setStatus(event.target.value)
+                       }}/>
+                <button>Add Car</button>
+            </form>
+        </div>
     )
 }
 

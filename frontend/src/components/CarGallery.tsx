@@ -1,36 +1,33 @@
 import {Car} from "../model/Car";
-import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import {NavLink} from "react-router-dom";
+import CarCard from "./CarCard";
 import './CarGallery.css';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 type Props = {
     cars: Car[]
 }
 
 export default function CarGallery(props: Props) {
-
-    const rows = props.cars.map((car) => ({
-        id: car.id,
-        license_plate: car.license_plate,
-        model: car.model,
-        color: car.color,
-        status: car.status,
-    }));
-
-    const columns: GridColDef[] = [
-        {field: 'license_plate', headerName: 'License plate', flex: 1},
-        {field: 'model', headerName: 'Model', flex: 1},
-        {field: 'color', headerName: 'Color', flex: 1},
-        {field: 'status', headerName: 'Status', flex: 1},
-    ];
-
     return (
         <>
-            <h1>All Cars</h1>
-            <NavLink to="/cars/add">Add car</NavLink>
-            <div style={{height: 300, width: '100%'}}>
-                <DataGrid rows={rows} columns={columns}/>
+            <h1>Cars</h1>
+            <div className="right">
+                <NavLink to="/cars/add"><AddCircleIcon/></NavLink>
             </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>License plate</th>
+                    <th>Model</th>
+                    <th>Color</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                {
+                    props.cars.map((car) => <CarCard key={car.id} car={car}/>)
+                }
+            </table>
         </>
     )
 }

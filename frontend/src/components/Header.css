@@ -15,12 +15,16 @@ header {
 .logo {
     width: 30px;
     height: 30px;
-    border-right: 1px solid #FFF;
     padding-right: 50px;
 }
 
 header a:link:first-child, header a:visited:first-child {
     margin-right: 20px;
+}
+
+header a:link {
+    padding: 15px;
+    margin: 15px;
 }
 
 header a:link, header a:visited {
