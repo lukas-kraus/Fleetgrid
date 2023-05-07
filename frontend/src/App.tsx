@@ -58,14 +58,12 @@ function App() {
             .catch(() => console.error("Couldn't delete car"));
     }
 
-    function AuthHeader() {
-        return authenticated ? <Header/> : null;
-    }
-
     return (
         <>
             <BrowserRouter>
-                {AuthHeader()}
+                {authenticated ? (
+                    <Header/>
+                ) : null}
                 <Routes>
                     <Route path='/login' element={<Login onLogin={login}/>}/>
                     <Route element={<ProtectedRoutes user={user}/>}>
