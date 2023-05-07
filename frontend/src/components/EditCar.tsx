@@ -1,9 +1,9 @@
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import "./AddCar.css"
+import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {Car} from "../model/Car";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {wait} from "@testing-library/user-event/dist/utils";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 type Props = {
     editCar: (newCar: Car) => void
@@ -62,6 +62,15 @@ export default function EditCar(props: Props) {
 
     return (
         <div>
+            <h1>
+                        <span>
+                            <Link to="/cars">Cars</Link>
+                            <ArrowForwardIosIcon/>
+                            <Link to={`/cars/${car.id}`}>{car.license_plate}</Link>
+                            <ArrowForwardIosIcon/>
+                            </span>
+                Edit
+            </h1>
             <form onSubmit={onSaveCar}>
                 <input type="text"
                        name="license_plate"
@@ -88,6 +97,7 @@ export default function EditCar(props: Props) {
                        onChange={onChange}
                 />
                 <button>Update</button>
+                <Link to={`/cars/${car.id}/edit`} className="button-link">Edit</Link>
             </form>
         </div>
     )

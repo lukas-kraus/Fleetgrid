@@ -4,6 +4,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {wait} from "@testing-library/user-event/dist/utils";
 import './CarDetails.css';
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 type Props = {
     deleteCar: (id: string) => void;
@@ -43,14 +44,20 @@ export default function CarDetails(props: Props) {
         <div>
             {car ? (
                 <>
-                    <h1>{car.model} ({car.status})</h1>
+                    <h1>
+                        <span>
+                            <Link to="/cars">Cars</Link>
+                            <ArrowForwardIosIcon/>
+                        </span>
+                        {car.license_plate}
+                    </h1>
                     <ul>
                         <li><b>License plate:</b> {car.license_plate}</li>
                         <li><b>Color:</b> {car.color}</li>
                         <li><b>ID:</b> {car.id}</li>
                     </ul>
-                    <Link to={`/cars/${car.id}/edit`}>Edit</Link>
-                    <Link to="#" onClick={onDeleteClick}>Delete</Link>
+                    <Link to={`/cars/${car.id}/edit`} className="button-link">Edit</Link>
+                    <Link to="#" onClick={onDeleteClick} className="button-link">Delete</Link>
                 </>
             ) : (
                 <h1>Loading ...</h1>
