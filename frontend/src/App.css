@@ -1,38 +1,80 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  padding: 2%;
+  background: #EEF3F7;
+}
+
+#root {
+  background: #FFF;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+main {
+  padding: 30px 10px 20px 10px;
+}
+
+a:link, a:visited {
+  color: #000;
+  text-decoration: none;
+  transition: all 100ms linear 100ms;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+h1 a {
+  margin: 0;
+  padding: 0;
+}
+
+h1 span {
+  opacity: 0.4;
+}
+
+.right {
+  float: right;
+}
+
+input, button, a.button-link {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 1em;
+  display: block;
+  width: 40%;
+  background: #F4F6F8;
+  padding: 20px;
+  margin: 10px 0 10px 0;
+  border: none;
+  border-radius: 10px;
+}
+
+button, a.button-link {
+  width: 43%;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  background: #253332;
+  color: #FFFFFF;
+  transition: all 100ms linear 100ms;
+}
+
+a.button-link {
+  width: 40%;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button:hover, a.button-link:hover {
+  background: #253332;
+  color: #FFFFFF;
 }

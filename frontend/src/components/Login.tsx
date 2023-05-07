@@ -1,5 +1,7 @@
 import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import './Login.css';
+import logo from '../logo.png'
 
 type Props = {
     onLogin: (username: string, password: string) => Promise<void>
@@ -24,10 +26,17 @@ export default function Login(props: Props) {
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <input value={username} placeholder="username" type="text" onChange={e => setUsername(e.target.value)}/>
-            <input value={password} placeholder="password" type="password" onChange={e => setPassword(e.target.value)}/>
-            <button type="submit">Login</button>
-        </form>
+        <div className="login-page">
+            <img src={logo} className="logo" alt="Fleetgrid"/>
+            <div className="box">
+                <form onSubmit={onSubmit}>
+                    <input value={username} placeholder="Username" type="text"
+                           onChange={e => setUsername(e.target.value)}/>
+                    <input value={password} placeholder="Password" type="password"
+                           onChange={e => setPassword(e.target.value)}/>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
     )
 }

@@ -11,10 +11,12 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import useUser from "./hooks/useUser";
 import Home from "./components/Home";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 function App() {
-    const {login} = useUser()
+    const {user, login} = useUser()
     const [cars, setCars] = useState<Car[]>([])
+    const authenticated = user !== undefined && user !== 'anonymousUser'
 
     useEffect(() => {
         loadAllCars()
@@ -56,23 +58,28 @@ function App() {
             .catch(() => console.error("Couldn't delete car"));
     }
 
+    function AuthHeader() {
+        return authenticated ? <Header/> : null;
+    }
+
     return (
         <>
             <BrowserRouter>
-                <Header/>
-                <main>
-                    <Routes>
+                {AuthHeader()}
+                <Routes>
+                    <Route path='/login' element={<Login onLogin={login}/>}/>
+                    <Route element={<ProtectedRoutes user={user}/>}>
                         <Route path="/" element={<Home/>}/>
-                        <Route path="/login" element={<Login onLogin={login}/>}/>
                         <Route path="/cars" element={<CarGallery cars={cars}/>}/>
                         <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
                         <Route path="/cars/:id" element={<CarDetails deleteCar={deleteCar}/>}/>
                         <Route path="/cars/:id/edit" element={<EditCar editCar={editCar}/>}/>
-                    </Routes>
-                </main>
+                    </Route>
+                </Routes>
             </BrowserRouter>
         </>
-    );
+    )
+        ;
 }
 
 export default App;

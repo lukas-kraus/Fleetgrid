@@ -9,7 +9,7 @@ export default function Header() {
             <NavLink to="/" className="logo"><img src={logo}
                                                   className="logo"
                                                   alt="Fleetlink"/></NavLink>
-            <div className="seperator"></div>
+            <div className="separator"></div>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/cars">Cars</NavLink>
             <NavLink to="/trips">Trips</NavLink>
