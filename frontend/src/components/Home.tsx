@@ -1,7 +1,11 @@
-export default function Home() {
+type Props = {
+    user: string | undefined
+}
+
+export default function Home(props: Props) {
     return (
         <div>
-            <h1>Hi Lukas!</h1>
+            <h1>Hi {props.user}!</h1>
         </div>
     )
 }
