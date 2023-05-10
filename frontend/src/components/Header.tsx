@@ -14,13 +14,14 @@ export default function Header(props: Props) {
     const [, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
 
-    function logoutUser() {
-        props
-            .onLogout()
-            .then(() => {
-                setIsLoggedIn(false);
-                navigate("/login");
-            })
+    async function logoutUser() {
+        try {
+            await props.onLogout();
+            setIsLoggedIn(false);
+            navigate("/login");
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
