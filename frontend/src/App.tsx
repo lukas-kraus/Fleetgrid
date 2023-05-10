@@ -14,13 +14,23 @@ import Home from "./components/Home";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 function App() {
-    const {user, login} = useUser()
+    const {user, login, logout, isLoggedIn} = useUser()
     const [cars, setCars] = useState<Car[]>([])
     const authenticated = user !== undefined && user !== 'anonymousUser'
 
     useEffect(() => {
-        loadAllCars()
-    }, [])
+        if (authenticated) {
+            loadAllCars();
+        }
+        // eslint-disable-next-line
+    }, [authenticated])
+
+    function logoutUser() {
+        return new Promise<void>((resolve) => {
+            logout();
+            resolve();
+        });
+    }
 
     function loadAllCars() {
         axios.get("/api/cars")
@@ -57,17 +67,18 @@ function App() {
             })
             .catch(() => console.error("Couldn't delete car"));
     }
-
     return (
         <>
             <BrowserRouter>
                 {authenticated ? (
-                    <Header/>
+                    <Header onLogout={logoutUser}
+                            user={user}
+                    />
                 ) : null}
                 <Routes>
                     <Route path='/login' element={<Login onLogin={login}/>}/>
-                    <Route element={<ProtectedRoutes user={user}/>}>
-                        <Route path="/" element={<Home/>}/>
+                    <Route element={<ProtectedRoutes user={user} isLoggedIn={isLoggedIn}/>}>
+                        <Route path="/" element={<Home user={user}/>}/>
                         <Route path="/cars" element={<CarGallery cars={cars}/>}/>
                         <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
                         <Route path="/cars/:id" element={<CarDetails deleteCar={deleteCar}/>}/>

@@ -1,9 +1,28 @@
 import logo from '../logo.png'
 import './Header.css';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import {NavLink} from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
+import {useState} from "react";
 
-export default function Header() {
+type Props = {
+    onLogout: () => Promise<void>
+    user: string | undefined
+};
+
+export default function Header(props: Props) {
+
+    const [, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+
+    function logoutUser() {
+        props
+            .onLogout()
+            .then(() => {
+                setIsLoggedIn(false);
+                navigate("/login");
+            })
+    }
+
     return (
         <header>
             <NavLink to="/" className="logo"><img src={logo}
@@ -17,8 +36,8 @@ export default function Header() {
             <NavLink to="/settings">Settings</NavLink>
             <div className="user">
                 <NavLink to="#">
-                    <AccountCircleIcon/> <span>Lukas</span>
-                    <span className="logout">Logout?</span>
+                    <AccountCircleIcon/> <span>{props.user}</span>
+                    <Link to="#" onClick={logoutUser} className="logout">Logout?</Link>
                 </NavLink>
             </div>
         </header>
