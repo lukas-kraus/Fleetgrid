@@ -78,7 +78,7 @@ function App() {
                 <Routes>
                     <Route path='/login' element={<Login onLogin={login}/>}/>
                     <Route element={<ProtectedRoutes user={user} isLoggedIn={isLoggedIn}/>}>
-                        <Route path="/" element={<Home user={user}/>}/>
+                        <Route path="/" element={<Home user={user} cars={cars}/>}/>
                         <Route path="/cars" element={<CarGallery cars={cars}/>}/>
                         <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
                         <Route path="/cars/:id" element={<CarDetails deleteCar={deleteCar}/>}/>
