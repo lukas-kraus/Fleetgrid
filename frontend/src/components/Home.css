@@ -1,0 +1,78 @@
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.stat {
+    background: #FFFFFF;
+    border-radius: 15px;
+    flex: 1 0 200px; /* 200px ist die ursprüngliche Breite */
+    max-width: 100%;
+    height: 100px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 10px;
+    align-items: center;
+    color: #1F2730;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 30px 60px -12px, rgba(0, 0, 0, 0.3) 0 18px 36px -18px;
+}
+
+.stat .icon {
+    justify-self: end;
+    align-self: end;
+}
+
+.stat .icon [data-testid="StreetviewIcon"] {
+    background: rgba(103, 173, 91, 0.3);
+    color: rgba(103, 173, 91, 1);
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.stat .icon [data-testid="LocalParkingIcon"] {
+    background: rgba(93, 163, 188, 0.3);
+    color: rgba(93, 163, 188, 1);
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.stat .icon [data-testid="EvStationIcon"] {
+    background: rgba(217, 180, 65, 0.3);
+    color: rgba(217, 180, 65, 1);
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.stat .icon [data-testid="TimeToLeaveIcon"] {
+    background: rgba(178, 178, 178, 0.3);
+    color: rgba(178, 178, 178, 1);
+    padding: 12px;
+    border-radius: 50%;
+}
+
+
+.stat .text {
+    grid-row: 1 / 3;
+    grid-column: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stat h2 {
+    font-weight: 500;
+    font-size: 1em;
+    margin: 0;
+}
+
+.stat .number {
+    font-size: 3em;
+    font-weight: 800;
+    line-height: normal;
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+}
