@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import useUser from "./hooks/useUser";
 import Home from "./components/Home";
 import ProtectedRoutes from "./ProtectedRoutes";
+import {ToastContainer} from "react-toastify";
 
 function App() {
     const {user, login, logout, isLoggedIn} = useUser()
@@ -86,6 +87,7 @@ function App() {
                     </Route>
                 </Routes>
             </BrowserRouter>
+            <ToastContainer/>
         </>
     )
         ;

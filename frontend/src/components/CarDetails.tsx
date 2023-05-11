@@ -5,6 +5,8 @@ import axios from "axios";
 import {wait} from "@testing-library/user-event/dist/utils";
 import './CarDetails.css';
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import {toast} from "react-toastify";
+import {toastConfig} from "../hooks/toastConfig";
 
 type Props = {
     deleteCar: (id: string) => void;
@@ -29,7 +31,7 @@ export default function CarDetails(props: Props) {
                 setCar(response.data)
             })
             .catch((r) => {
-                console.error("Car not found" + r)
+                toast.error("Couldn't load car: " + r, toastConfig)
             })
     }
 
@@ -37,6 +39,7 @@ export default function CarDetails(props: Props) {
         if (car) {
             props.deleteCar(car.id);
             wait(500).then(() => navigate("/cars"))
+            toast.success(car.license_plate + " was successfully deleted", toastConfig)
         }
     }
 
