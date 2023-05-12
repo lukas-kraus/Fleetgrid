@@ -1,15 +1,13 @@
 package com.github.lukaskraus.backend.service;
 
 import com.github.lukaskraus.backend.model.Car;
-import com.github.lukaskraus.backend.model.MongoUser;
 import com.github.lukaskraus.backend.model.Status;
 import com.github.lukaskraus.backend.repo.CarRepo;
-import com.github.lukaskraus.backend.repo.MongoUserRepo;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,9 +16,7 @@ import static org.mockito.Mockito.*;
 class CarServiceTest {
 
     CarRepo carRepo = mock(CarRepo.class);
-    MongoUserRepo mongoUserRepo = mock(MongoUserRepo.class);
     CarService carService = new CarService(carRepo);
-    MongoUserDetailsService mongoUserDetailsService = new MongoUserDetailsService(mongoUserRepo);
 
     @Test
     void getAllCars_ReturnsEmptyList_WhenNoCarsExist() {
@@ -82,17 +78,12 @@ class CarServiceTest {
     }
 
     @Test
-    void getMongoUserByName() {
+    void getNotExistentCar_ReturnException() {
         // GIVEN
-        String username = "randomuser";
-        String password = "randompassword1";
-
-        MongoUser expected = new MongoUser("12345", username, password);
-        when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
+        String id = "9999";
         // WHEN
-        UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);
+        when(carRepo.findById(id)).thenThrow(new NoSuchElementException());
         // THEN
-        verify(mongoUserRepo).findMongoUserByUsername(username);
-        assertEquals(expected.username(), actual.getUsername());
+        assertThrows(NoSuchElementException.class, () -> carService.getCarById(id));
     }
 }

@@ -4,6 +4,8 @@ import StreetviewIcon from '@mui/icons-material/Streetview';
 import LocalParkingIcon from '@mui/icons-material/LocalParking';
 import EvStationIcon from '@mui/icons-material/EvStation';
 import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
+import React from "react";
+
 
 type Props = {
     user: string | undefined
@@ -11,6 +13,7 @@ type Props = {
 }
 
 export default function Home(props: Props) {
+
 
     function countCars(status: string): number {
         return status ? props.cars.filter((car) => car.status.toLowerCase() === status.toLowerCase()).length : props.cars.length;

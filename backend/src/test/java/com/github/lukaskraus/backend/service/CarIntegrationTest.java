@@ -15,8 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -136,19 +135,12 @@ class CarIntegrationTest {
     }
 
     @DirtiesContext
-    @WithMockUser(username = "kevin")
+    @WithMockUser
     @Test
-    void showUsernameKevin_WhenLoggedIn() throws Exception {
-        mockMvc.perform(get("/api/users/me"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("kevin"));
-    }
-
-    @DirtiesContext
-    @Test
-    void showAnonymousUser_WhenNotLoggedIn() throws Exception {
-        mockMvc.perform(get("/api/users/me"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("anonymousUser"));
+    void getSpecificResponseExceptionWhenCarNotFound() throws Exception {
+        mockMvc.perform(get("/api/cars/999999")
+                        .with(csrf()))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("message").value("Car with id 999999 not found"));
     }
 }
