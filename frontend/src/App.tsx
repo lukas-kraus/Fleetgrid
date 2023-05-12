@@ -67,6 +67,7 @@ function App() {
             })
             .catch(() => console.error("Couldn't delete car"));
     }
+
     return (
         <>
             <BrowserRouter>
