@@ -40,7 +40,7 @@ public class UserController {
         }
 
         MongoUser mongoUser = mongoUserDetailsService.getUserByUsername(username);
-        return new MongoUserDTO(mongoUser.username(), mongoUser.lastlogin());
+        return new MongoUserDTO(mongoUser.username(), mongoUser.lastLogin());
     }
 
     @PostMapping("/login")

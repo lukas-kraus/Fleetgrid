@@ -25,7 +25,7 @@ export default function Home(props: Props) {
     return (
         <>
             <h1>Hi {props.user}!</h1>
-            <p>Your last login was {relativeTime} ago. ({convertTime})</p>
+            <p>Your last login was {relativeTime} ({convertTime})</p>
             <div className="stats">
                 <div className="stat">
                     <div className="icon">
