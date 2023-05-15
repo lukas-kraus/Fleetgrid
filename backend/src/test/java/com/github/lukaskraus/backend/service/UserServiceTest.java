@@ -5,6 +5,7 @@ import com.github.lukaskraus.backend.repo.MongoUserRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,8 +21,9 @@ class UserServiceTest {
         // GIVEN
         String username = "randomuser";
         String password = "randompassword1";
+        LocalDateTime lastLogin = LocalDateTime.now();
 
-        MongoUser expected = new MongoUser("12345", username, password);
+        MongoUser expected = new MongoUser("12345", username, password, lastLogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
         UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);

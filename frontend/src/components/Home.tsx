@@ -8,7 +8,6 @@ import {User} from "../model/User";
 import moment from "moment";
 import React from "react";
 
-
 type Props = {
     user: string | undefined
     cars: Car[]
