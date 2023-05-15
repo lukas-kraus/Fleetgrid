@@ -8,6 +8,7 @@ import com.github.lukaskraus.backend.repo.MongoUserRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -86,8 +87,9 @@ class CarServiceTest {
         // GIVEN
         String username = "randomuser";
         String password = "randompassword1";
+        LocalDateTime lastlogin = LocalDateTime.now();
 
-        MongoUser expected = new MongoUser("12345", username, password);
+        MongoUser expected = new MongoUser("12345", username, password, lastlogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
         UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);
