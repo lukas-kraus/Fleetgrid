@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,7 +24,11 @@ public class CarController {
 
     @GetMapping("/{id}")
     Car getCarById(@PathVariable String id) {
-        return carService.getCarById(id);
+        try {
+            return carService.getCarById(id);
+        } catch (NoSuchElementException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found!", exception);
+        }
     }
 
     @PostMapping

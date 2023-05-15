@@ -4,6 +4,9 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {wait} from "@testing-library/user-event/dist/utils";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import {toastConfig} from "../hooks/toastConfig";
+import {toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {
     editCar: (newCar: Car) => void
@@ -36,7 +39,7 @@ export default function EditCar(props: Props) {
                 setCar(response.data)
             })
             .catch((r) => {
-                console.error("Car not found" + r)
+                toast.error("Couldn't find car: " + r, toastConfig)
             })
     }
 
@@ -46,6 +49,7 @@ export default function EditCar(props: Props) {
         event.preventDefault();
         if (id) {
             props.editCar(car);
+            toast.success(car.license_plate + " was successfully updated!", toastConfig)
             wait(500).then(() => navigate(`/cars/${car.id}`))
         }
     }
@@ -68,7 +72,7 @@ export default function EditCar(props: Props) {
                             <ArrowForwardIosIcon/>
                             <Link to={`/cars/${car.id}`}>{car.license_plate}</Link>
                             <ArrowForwardIosIcon/>
-                            </span>
+                        </span>
                 Edit
             </h1>
             <form onSubmit={onSaveCar}>
@@ -96,8 +100,7 @@ export default function EditCar(props: Props) {
                        placeholder={car.status}
                        onChange={onChange}
                 />
-                <button>Update</button>
-                <Link to={`/cars/${car.id}/edit`} className="button-link">Edit</Link>
+                <button className="button">Update</button>
             </form>
         </div>
     )

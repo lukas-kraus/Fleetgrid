@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -80,6 +81,16 @@ class CarServiceTest {
         carService.editCar(car);
         // THEN
         verify(carRepo).save(car);
+    }
+
+    @Test
+    void getNotExistentCar_ReturnException() {
+        // GIVEN
+        String id = "9999";
+        // WHEN
+        when(carRepo.findById(id)).thenThrow(new NoSuchElementException());
+        // THEN
+        assertThrows(NoSuchElementException.class, () -> carService.getCarById(id));
     }
 
     @Test

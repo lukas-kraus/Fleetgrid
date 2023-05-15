@@ -2,6 +2,8 @@ import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import './Login.css';
 import logo from '../logo.png'
+import {toastConfig} from "../hooks/toastConfig";
+import {toast} from "react-toastify";
 
 type Props = {
     onLogin: (username: string, password: string) => Promise<void>
@@ -15,13 +17,17 @@ export default function Login(props: Props) {
 
     function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-
+        if (!username || !password) {
+            toast.error("Please fill in all fields", toastConfig);
+            return;
+        }
         props.onLogin(username, password)
             .then(() => {
-                navigate("/cars");
+                navigate("/");
             })
-            .catch((error) => {
-                console.error(error);
+            .catch((r) => {
+                console.log("FEHLER: " + r)
+                toast.error("Couldn't login " + r, toastConfig)
             });
     }
 
@@ -34,7 +40,7 @@ export default function Login(props: Props) {
                            onChange={e => setUsername(e.target.value)}/>
                     <input value={password} placeholder="Password" type="password"
                            onChange={e => setPassword(e.target.value)}/>
-                    <button type="submit">Login</button>
+                    <button type="submit" className="button">Login</button>
                 </form>
             </div>
         </div>
