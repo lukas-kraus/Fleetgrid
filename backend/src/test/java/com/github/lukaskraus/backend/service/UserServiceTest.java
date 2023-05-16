@@ -32,4 +32,19 @@ class UserServiceTest {
         assertEquals(expected.username(), actual.getUsername());
     }
 
+    @Test
+    void getMongoUserByUsername() {
+        // GIVEN
+        String username = "randomuser";
+        String password = "randompassword1";
+        LocalDateTime lastLogin = LocalDateTime.now();
+
+        MongoUser expected = new MongoUser("12345", username, password, null, lastLogin);
+        when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
+        // WHEN
+        MongoUser actual = mongoUserDetailsService.getUserByUsername(username);
+        // THEN
+        verify(mongoUserRepo).findMongoUserByUsername(username);
+        assertEquals(expected.username(), actual.username());
+    }
 }
