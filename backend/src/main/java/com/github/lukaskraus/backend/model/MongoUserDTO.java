@@ -4,5 +4,7 @@ import java.time.LocalDateTime;
 
 public record MongoUserDTO(
         String username,
-        LocalDateTime lastLogin) {
+        LocalDateTime lastLogin,
+        LocalDateTime newLastLogin
+) {
 }

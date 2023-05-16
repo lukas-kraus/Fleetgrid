@@ -23,7 +23,7 @@ class UserServiceTest {
         String password = "randompassword1";
         LocalDateTime lastLogin = LocalDateTime.now();
 
-        MongoUser expected = new MongoUser("12345", username, password, lastLogin);
+        MongoUser expected = new MongoUser("12345", username, password, null, lastLogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
         UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);

@@ -100,7 +100,7 @@ class CarServiceTest {
         String password = "randompassword1";
         LocalDateTime lastlogin = LocalDateTime.now();
 
-        MongoUser expected = new MongoUser("12345", username, password, lastlogin);
+        MongoUser expected = new MongoUser("12345", username, password, null, lastlogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
         UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);
