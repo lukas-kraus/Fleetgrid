@@ -37,7 +37,10 @@ export default function Home(props: Props) {
     return (
         <>
             <h1>Hi {props.userDetails?.firstname} {props.userDetails?.lastname}!</h1>
-            <p>Your last login was {relativeTime} ({dayOutput}).</p>
+            {props.userDetails?.lastLogin ? (
+                <p>Your last login was {relativeTime} ({dayOutput}).</p>
+            ) : null
+            }
             <div className="stats">
                 <div className="stat">
                     <div className="icon">

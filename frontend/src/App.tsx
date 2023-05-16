@@ -74,7 +74,7 @@ function App() {
             <BrowserRouter>
                 {authenticated ? (
                     <Header onLogout={logoutUser}
-                            user={user}
+                            userDetails={userDetails}
                     />
                 ) : null}
                 <Routes>

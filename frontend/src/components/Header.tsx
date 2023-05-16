@@ -5,11 +5,12 @@ import {Link, NavLink, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {toast} from "react-toastify";
 import {toastConfig} from "../hooks/toastConfig";
+import {User} from "../model/User";
 
 type Props = {
     onLogout: () => Promise<void>
-    user: string | undefined
-};
+    userDetails: User | undefined
+}
 
 export default function Header(props: Props) {
 
@@ -43,7 +44,7 @@ export default function Header(props: Props) {
             <NavLink to="/settings">Settings</NavLink>
             <div className="user">
                 <NavLink to="#">
-                    <AccountCircleIcon/> <span>{props.user}</span>
+                    <AccountCircleIcon/> <span>{props.userDetails?.firstname}</span>
                     <Link to="#" onClick={logoutUser} className="logout">Logout?</Link>
                 </NavLink>
             </div>
