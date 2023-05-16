@@ -77,7 +77,7 @@ class UserIntegrationTest {
     @Test
     void showLastLogin_WhenUserLoggedIn() throws Exception {
 
-        MongoUser testUser = new MongoUser("123", "kevin", "kevin123", LocalDateTime.of(2023, 5, 16, 17, 30, 40, 50000), LocalDateTime.now());
+        MongoUser testUser = new MongoUser("123", "kevin", "kevin123", "Kevin", "Stupid", LocalDateTime.of(2023, 5, 16, 17, 30, 40, 50000), LocalDateTime.now());
         mongoUserRepo.save(testUser);
 
         mockMvc.perform(get("/api/users/kevin")
@@ -92,7 +92,7 @@ class UserIntegrationTest {
     @Test
     void throwForbiddenException_WhenUserIsNotEqualToLoggedIn() throws Exception {
 
-        MongoUser testUser = new MongoUser("123", "kevin", "kevin123", LocalDateTime.of(2023, 5, 16, 17, 30, 40, 50000), LocalDateTime.now());
+        MongoUser testUser = new MongoUser("123", "kevin", "kevin123", "Kevin", "Stupid", LocalDateTime.of(2023, 5, 16, 17, 30, 40, 50000), LocalDateTime.now());
         mongoUserRepo.save(testUser);
 
         mockMvc.perform(get("/api/users/michael")

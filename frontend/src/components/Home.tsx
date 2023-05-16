@@ -20,13 +20,24 @@ export default function Home(props: Props) {
         return status ? props.cars.filter((car) => car.status.toLowerCase() === status.toLowerCase()).length : props.cars.length;
     }
 
-    const relativeTime = moment(props.userDetails?.lastLogin).fromNow();
-    const convertTime = moment(props.userDetails?.lastLogin).format('DD.MM.YYYY HH:mm');
+    const lastLogin = moment(props.userDetails?.lastLogin);
+    const relativeTime = lastLogin.fromNow();
+    const convertTime = lastLogin.format('HH:mm');
+    let day = moment(lastLogin, 'day');
+    let today = moment().startOf('day');
+    let yesterday = moment().subtract(1, 'day').startOf('day');
+    let dayOutput;
+
+    if (day.isSame(today, 'day') || day.isSame(yesterday, 'day')) {
+        dayOutput = "at " + convertTime;
+    } else {
+        dayOutput = lastLogin.format('DD.MM.YYYY [at] HH:mm');
+    }
 
     return (
         <>
-            <h1>Hi {props.user}!</h1>
-            <p>Your last login was {relativeTime} ({convertTime})</p>
+            <h1>Hi {props.userDetails?.firstname} {props.userDetails?.lastname}!</h1>
+            <p>Your last login was {relativeTime} ({dayOutput}).</p>
             <div className="stats">
                 <div className="stat">
                     <div className="icon">

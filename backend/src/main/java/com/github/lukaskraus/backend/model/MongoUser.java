@@ -11,6 +11,8 @@ public record MongoUser(
         String id,
         String username,
         String password,
+        String firstname,
+        String lastname,
         LocalDateTime lastLogin,
         LocalDateTime newLastLogin
 ) {

@@ -24,7 +24,7 @@ class UserServiceTest {
         String password = "randompassword1";
         LocalDateTime lastLogin = LocalDateTime.now();
 
-        MongoUser expected = new MongoUser("12345", username, password, null, lastLogin);
+        MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", null, lastLogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
         UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);
@@ -40,7 +40,7 @@ class UserServiceTest {
         String password = "randompassword1";
         LocalDateTime lastLogin = LocalDateTime.now();
 
-        MongoUser expected = new MongoUser("12345", username, password, null, lastLogin);
+        MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", null, lastLogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
         MongoUser actual = mongoUserDetailsService.getUserByUsername(username);
@@ -57,7 +57,7 @@ class UserServiceTest {
         LocalDateTime lastLogin = LocalDateTime.of(2023, 5, 16, 17, 30, 40, 50000);
         LocalDateTime newLastLogin = LocalDateTime.now();
 
-        MongoUser expected = new MongoUser("12345", username, password, lastLogin, newLastLogin);
+        MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", lastLogin, newLastLogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
         MongoUser actual = mongoUserDetailsService.getUserByUsername(username);

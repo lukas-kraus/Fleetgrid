@@ -39,7 +39,7 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User is not authorized to perform this operation");
         }
         MongoUser mongoUser = mongoUserDetailsService.getUserByUsername(username);
-        return new MongoUserDTO(mongoUser.username(), mongoUser.lastLogin(), LocalDateTime.now());
+        return new MongoUserDTO(mongoUser.username(), mongoUser.firstname(), mongoUser.lastname(), mongoUser.lastLogin(), LocalDateTime.now());
     }
 
     @PostMapping("/login")
@@ -48,7 +48,7 @@ public class UserController {
         Optional<MongoUser> optionalMongoUser = mongoUserRepo.findMongoUserByUsername(username);
         if (optionalMongoUser.isPresent()) {
             MongoUser mongoUser = optionalMongoUser.get();
-            mongoUser = new MongoUser(mongoUser.id(), mongoUser.username(), mongoUser.password(), mongoUser.lastLogin(), LocalDateTime.now());
+            mongoUser = new MongoUser(mongoUser.id(), mongoUser.username(), mongoUser.password(), mongoUser.firstname(), mongoUser.lastname(), mongoUser.newLastLogin(), LocalDateTime.now());
             mongoUserRepo.save(mongoUser);
         }
         return username;
