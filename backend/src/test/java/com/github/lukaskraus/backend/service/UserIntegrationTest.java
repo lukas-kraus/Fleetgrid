@@ -33,6 +33,19 @@ class UserIntegrationTest {
     @DirtiesContext
     @WithMockUser(username = "kevin")
     @Test
+    void performSuccessfulLogin_ReturnUsername() throws Exception {
+        mockMvc.perform(post("/api/users/login")
+                        .with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(content().string("kevin"))
+                .andReturn()
+                .getRequest()
+                .getSession();
+    }
+
+    @DirtiesContext
+    @WithMockUser(username = "kevin")
+    @Test
     void showUsernameKevin_WhenLoggedIn() throws Exception {
         mockMvc.perform(get("/api/users/me"))
                 .andExpect(status().isOk())
@@ -58,7 +71,6 @@ class UserIntegrationTest {
                 .getRequest()
                 .getSession();
     }
-
 
     @DirtiesContext
     @WithMockUser(username = "kevin")
