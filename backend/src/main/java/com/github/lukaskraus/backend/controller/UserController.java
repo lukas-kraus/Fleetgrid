@@ -38,7 +38,6 @@ public class UserController {
         if (!user.equals(username)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User is not authorized to perform this operation");
         }
-
         MongoUser mongoUser = mongoUserDetailsService.getUserByUsername(username);
         return new MongoUserDTO(mongoUser.username(), mongoUser.lastLogin());
     }
