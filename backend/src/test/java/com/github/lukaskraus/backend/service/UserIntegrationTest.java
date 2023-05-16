@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -45,6 +46,19 @@ class UserIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("anonymousUser"));
     }
+
+    @DirtiesContext
+    @WithMockUser(username = "kevin")
+    @Test
+    void performSuccessfulLogout() throws Exception {
+        mockMvc.perform(post("/api/users/logout")
+                        .with(csrf()))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getRequest()
+                .getSession();
+    }
+
 
     @DirtiesContext
     @WithMockUser(username = "kevin")
