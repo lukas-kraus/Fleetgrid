@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.*;
 
 class UserServiceTest {
@@ -46,5 +47,23 @@ class UserServiceTest {
         // THEN
         verify(mongoUserRepo).findMongoUserByUsername(username);
         assertEquals(expected.username(), actual.username());
+    }
+
+    @Test
+    void updateLastLoginWithNewLastLogin() {
+        // GIVEN
+        String username = "randomuser";
+        String password = "randompassword1";
+        LocalDateTime lastLogin = LocalDateTime.of(2023, 5, 16, 17, 30, 40, 50000);
+        LocalDateTime newLastLogin = LocalDateTime.now();
+
+        MongoUser expected = new MongoUser("12345", username, password, lastLogin, newLastLogin);
+        when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
+        // WHEN
+        MongoUser actual = mongoUserDetailsService.getUserByUsername(username);
+        // THEN
+        verify(mongoUserRepo).findMongoUserByUsername(username);
+        assertEquals(expected, actual);
+        assertNotEquals(expected.lastLogin(), actual.newLastLogin());
     }
 }
