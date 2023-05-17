@@ -6,7 +6,6 @@ public record Driver(
         @Id
         String id,
         String firstname,
-        String lastname,
-        String address
+        String lastname
 ) {
 }

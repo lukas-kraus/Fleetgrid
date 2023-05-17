@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class DriverService {
-    private DriverRepo driverRepo;
+    private final DriverRepo driverRepo;
 
     public Driver addDriver(Driver driver) {
         return driverRepo.save(driver);
