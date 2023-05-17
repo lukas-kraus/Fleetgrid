@@ -1,4 +1,4 @@
-import {FormEvent, useState} from "react";
+import React, {FormEvent, useState} from "react";
 import {NewCar} from "../model/Car";
 import {Link, useNavigate} from "react-router-dom";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -59,13 +59,13 @@ export default function AddCar(props: AddCarProps) {
                        onChange={(event) => {
                            setColor(event.target.value)
                        }}/>
-                <input type="text"
-                       value={status}
-                       placeholder="Status"
-                       required
-                       onChange={(event) => {
-                           setStatus(event.target.value)
-                       }}/>
+                <select name="status" value={status} onChange={(event) => {
+                    setStatus(event.target.value)
+                }}>
+                    <option value="PARKED">Parked</option>
+                    <option value="OTW">On the way</option>
+                    <option value="CHARGING">Charging</option>
+                </select>
                 <button className="button">Add Car</button>
             </form>
         </div>
