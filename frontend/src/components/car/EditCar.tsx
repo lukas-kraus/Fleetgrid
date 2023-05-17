@@ -19,7 +19,12 @@ export default function EditCar(props: Props) {
         model: "",
         license_plate: "",
         color: "",
-        status: ""
+        status: "",
+        driver: {
+            id: "",
+            firstname: "",
+            lastname: ""
+        }
     }
 
     const [car, setCar] = useState<Car>(initialState)

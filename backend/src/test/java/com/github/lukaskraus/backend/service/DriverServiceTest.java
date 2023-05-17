@@ -31,7 +31,7 @@ class DriverServiceTest {
     }
 
     @Test
-    void addCar_verifyAddition() {
+    void addDriver_verifyAddition() {
         // GIVEN
         Driver actual = new Driver("123", "Max", "Mustermann");
         when(driverRepo.save(actual)).thenReturn(actual);
