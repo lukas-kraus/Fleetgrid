@@ -54,7 +54,7 @@ export default function EditCar(props: Props) {
         }
     }
 
-    function onChange(event: ChangeEvent<HTMLInputElement>) {
+    function onChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const targetName: string = event.target.name;
         const value: string = event.target.value;
         if (id) {
@@ -94,12 +94,11 @@ export default function EditCar(props: Props) {
                        placeholder={car.color}
                        onChange={onChange}
                 />
-                <input type="text"
-                       name="status"
-                       value={car.status}
-                       placeholder={car.status}
-                       onChange={onChange}
-                />
+                <select name="status" value={car.status} onChange={onChange}>
+                    <option value="PARKED">Parked</option>
+                    <option value="OTW">On the way</option>
+                    <option value="CHARGING">Charging</option>
+                </select>
                 <button className="button">Update</button>
             </form>
         </div>

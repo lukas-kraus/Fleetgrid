@@ -1,48 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  padding: 2%;
-  background: #EEF3F7;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    padding: 2%;
+    background: #EEF3F7;
 }
 
 #root {
-  background: #FFF;
-  padding: 30px;
-  border-radius: 20px;
+    background: #FFF;
+    padding: 30px;
+    border-radius: 20px;
 }
 
 main {
-  padding: 30px 10px 20px 10px;
+    padding: 30px 10px 20px 10px;
 }
 
 a:link, a:visited {
-  color: #000;
-  text-decoration: none;
-  transition: all 100ms linear 100ms;
-  padding: 0;
-  margin: 0;
+    color: #000;
+    text-decoration: none;
+    transition: all 100ms linear 100ms;
+    padding: 0;
+    margin: 0;
 }
 
 h1 {
-  display: flex;
-  justify-content: left;
-  align-items: center;
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
 
 h1 a {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 h1 span {
-  opacity: 0.4;
+    opacity: 0.4;
 }
 
 .right {
-  float: right;
+    float: right;
+}
+
+form {
+    width: 40%;
 }
 
 input, button.button, a.button-link {
@@ -50,7 +54,7 @@ input, button.button, a.button-link {
     font-weight: 300;
     font-size: 1em;
     display: block;
-    width: 40%;
+    width: 100%;
     background: #F4F6F8;
     padding: 20px;
     margin: 10px 0 10px 0;
@@ -70,11 +74,32 @@ button.button, a.button-link {
 }
 
 a.button-link {
-  width: 40%;
-  text-align: center;
+    width: 40%;
+    text-align: center;
 }
 
 button.button:hover, a.button-link:hover {
     background: #253332;
     color: #FFFFFF;
+}
+
+select {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 1em;
+    width: 107%;
+    background-color: #F4F6F8;
+    background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em + 13px), calc(100% - 15px) calc(1em + 13px);
+    background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+    background-repeat: no-repeat;
+    padding: 20px;
+    margin: 0;
+    border: none;
+    border-radius: 10px;
+    display: inline-block;
+    line-height: 1.5em;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
