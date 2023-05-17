@@ -1,73 +1,34 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import axios from "axios";
-import {Car, NewCar} from "./model/Car";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import CarGallery from "./components/CarGallery";
-import AddCar from "./components/AddCar";
-import CarDetails from "./components/CarDetails";
-import EditCar from "./components/EditCar";
+import CarGallery from "./components/car/CarGallery";
+import AddCar from "./components/car/AddCar";
+import CarDetails from "./components/car/CarDetails";
+import EditCar from "./components/car/EditCar";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import useUser from "./hooks/useUser";
 import Home from "./components/Home";
 import ProtectedRoutes from "./ProtectedRoutes";
 import {ToastContainer} from "react-toastify";
+import DriverGallery from "./components/driver/DriverGallery";
+import useDrivers from "./hooks/useDrivers";
+import useCars from "./hooks/useCars";
 
 function App() {
-    const {user, login, logout, isLoggedIn, userDetails} = useUser()
-    const [cars, setCars] = useState<Car[]>([])
+    const {user, login, logoutUser, isLoggedIn, userDetails} = useUser()
+    const {loadAllCars, addCar, editCar, deleteCar, cars} = useCars()
+    const {drivers, loadAllDrivers} = useDrivers()
     const authenticated = user !== undefined && user !== 'anonymousUser'
 
     useEffect(() => {
         if (authenticated) {
             loadAllCars();
+            loadAllDrivers();
         }
         // eslint-disable-next-line
     }, [authenticated])
 
-    function logoutUser() {
-        return new Promise<void>((resolve) => {
-            logout();
-            resolve();
-        });
-    }
-
-    function loadAllCars() {
-        axios.get("/api/cars")
-            .then(response => {
-                setCars(response.data);
-            })
-            .catch(() => console.error("Couldn't load all cars"));
-    }
-
-    function addCar(newCar: NewCar) {
-        axios.post("/api/cars", newCar)
-            .then(() => loadAllCars())
-            .catch(() => console.error("Couldn't add new car"));
-    }
-
-    function editCar(car: Car) {
-        axios.put(`/api/cars/${car.id}`, car)
-            .then((putCarResponse) => {
-                setCars(cars.map(currentCar => {
-                    if (currentCar.id === car.id) {
-                        return putCarResponse.data
-                    } else {
-                        return currentCar
-                    }
-                }))
-            })
-            .catch(console.error)
-    }
-
-    function deleteCar(id: string) {
-        axios.delete("/api/cars/" + id)
-            .then(() => {
-                setCars(cars.filter((car) => car.id !== id))
-            })
-            .catch(() => console.error("Couldn't delete car"));
-    }
 
     return (
         <>
@@ -85,6 +46,7 @@ function App() {
                         <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
                         <Route path="/cars/:id" element={<CarDetails deleteCar={deleteCar}/>}/>
                         <Route path="/cars/:id/edit" element={<EditCar editCar={editCar}/>}/>
+                        <Route path="/drivers" element={<DriverGallery drivers={drivers}/>}/>
                     </Route>
                 </Routes>
             </BrowserRouter>

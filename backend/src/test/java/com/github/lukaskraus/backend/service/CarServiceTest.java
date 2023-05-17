@@ -1,6 +1,7 @@
 package com.github.lukaskraus.backend.service;
 
 import com.github.lukaskraus.backend.model.Car;
+import com.github.lukaskraus.backend.model.Driver;
 import com.github.lukaskraus.backend.model.Status;
 import com.github.lukaskraus.backend.repo.CarRepo;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class CarServiceTest {
     @Test
     void addCar_verifyAddition() {
         // GIVEN
-        Car actual = new Car("567", "ID.3", "D-EF-365", "yellow", Status.CHARGING);
+        Car actual = new Car("567", "ID.3", "D-EF-365", "yellow", Status.CHARGING, new Driver("1234", "Max", "Mustermann"));
         when(carRepo.save(actual)).thenReturn(actual);
         // WHEN
         Car expected = carService.addCar(actual);
@@ -46,7 +47,7 @@ class CarServiceTest {
     void getCarById_ExpectCarById() {
         // GIVEN
         String id = "12345";
-        Car expected = new Car("12345", "Käfer", "A-BC-123", "black", Status.PARKED);
+        Car expected = new Car("12345", "Käfer", "A-BC-123", "black", Status.PARKED, new Driver("1234", "Max", "Mustermann"));
         when(carRepo.findById(id)).thenReturn(Optional.of(expected));
         // WHEN
         Car actual = carService.getCarById(id);
@@ -69,7 +70,7 @@ class CarServiceTest {
     void editCarById() {
         // GIVEN
         String id = "123567";
-        Car car = new Car("12345", "Käfer", "A-BC-123", "black", Status.PARKED);
+        Car car = new Car("12345", "Käfer", "A-BC-123", "black", Status.PARKED, new Driver("1234", "Max", "Mustermann"));
         when(carRepo.findById(id)).thenReturn(Optional.of(car));
         // WHEN
         carService.editCar(car);

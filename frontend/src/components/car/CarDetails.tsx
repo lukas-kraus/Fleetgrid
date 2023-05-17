@@ -1,4 +1,4 @@
-import {Car} from "../model/Car";
+import {Car} from "../../model/Car";
 import React, {useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
@@ -6,7 +6,7 @@ import {wait} from "@testing-library/user-event/dist/utils";
 import './CarDetails.css';
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {toast} from "react-toastify";
-import {toastConfig} from "../hooks/toastConfig";
+import {toastConfig} from "../../hooks/toastConfig";
 
 type Props = {
     deleteCar: (id: string) => void;

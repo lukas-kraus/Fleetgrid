@@ -8,7 +8,7 @@ public record Car(
         String model,
         String license_plate,
         String color,
-        Status status
+        Status status,
+        Driver driver
 ) {
 }
-

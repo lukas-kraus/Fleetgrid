@@ -1,9 +1,9 @@
-import React, {FormEvent, useState} from "react";
-import {NewCar} from "../model/Car";
+import {FormEvent, useState} from "react";
+import {NewCar} from "../../model/Car";
 import {Link, useNavigate} from "react-router-dom";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {toast} from "react-toastify";
-import {toastConfig} from "../hooks/toastConfig";
+import {toastConfig} from "../../hooks/toastConfig";
 
 type AddCarProps = {
     addCar: (newCar: NewCar) => void

@@ -1,10 +1,10 @@
 import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import {Car} from "../model/Car";
+import {Car} from "../../model/Car";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {wait} from "@testing-library/user-event/dist/utils";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import {toastConfig} from "../hooks/toastConfig";
+import {toastConfig} from "../../hooks/toastConfig";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -19,7 +19,12 @@ export default function EditCar(props: Props) {
         model: "",
         license_plate: "",
         color: "",
-        status: ""
+        status: "",
+        driver: {
+            id: "",
+            firstname: "",
+            lastname: ""
+        }
     }
 
     const [car, setCar] = useState<Car>(initialState)

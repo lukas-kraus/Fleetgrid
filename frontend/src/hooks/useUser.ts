@@ -61,5 +61,12 @@ export default function useUser() {
             .catch(() => console.error("Couldn't load all cars"));
     }
 
-    return {user, login, logout, isLoggedIn, userDetails}
+    function logoutUser() {
+        return new Promise<void>((resolve) => {
+            logout();
+            resolve();
+        });
+    }
+
+    return {user, login, isLoggedIn, userDetails, logoutUser}
 }

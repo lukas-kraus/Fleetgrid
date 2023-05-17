@@ -1,4 +1,4 @@
-import {Car} from "../model/Car";
+import {Car} from "../../model/Car";
 import {NavLink} from "react-router-dom";
 import CarCard from "./CarCard";
 import './CarGallery.css';
@@ -22,6 +22,7 @@ export default function CarGallery(props: Props) {
                     <th>Model</th>
                     <th>Color</th>
                     <th>Status</th>
+                    <th>Driver</th>
                 </tr>
                 </thead>
                 {
