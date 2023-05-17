@@ -1,4 +1,4 @@
-import {Car} from "../model/Car";
+import {Car} from "../../model/Car";
 import {Link} from "react-router-dom";
 
 type Props = {

@@ -1,4 +1,4 @@
-import {Car} from "../model/Car";
+import {Car} from "../../model/Car";
 import {NavLink} from "react-router-dom";
 import CarCard from "./CarCard";
 import './CarGallery.css';

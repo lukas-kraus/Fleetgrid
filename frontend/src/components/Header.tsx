@@ -40,7 +40,7 @@ export default function Header(props: Props) {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/cars">Cars</NavLink>
             <NavLink to="/trips">Trips</NavLink>
-            <NavLink to="/driver">Driver</NavLink>
+            <NavLink to="/drivers">Driver</NavLink>
             <NavLink to="/settings">Settings</NavLink>
             <div className="user">
                 <NavLink to="#">
