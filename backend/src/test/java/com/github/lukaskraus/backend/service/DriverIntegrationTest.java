@@ -12,7 +12,9 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -28,6 +30,20 @@ class DriverIntegrationTest {
     @BeforeEach
     void addDriverToRepo() {
         driverRepo.save(new Driver("123", "Max", "Mustermann"));
+    }
+
+    @WithMockUser
+    @Test
+    void getAllDrivers_ExpectAllDrivers() throws Exception {
+        mockMvc.perform(get("/api/drivers"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        [{
+                            "id": "123",
+                            "firstname": "Max",
+                            "lastname": "Mustermann"
+                        }]
+                         """));
     }
 
     @WithMockUser
