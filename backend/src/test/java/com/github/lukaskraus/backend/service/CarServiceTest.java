@@ -86,4 +86,5 @@ class CarServiceTest {
         // THEN
         assertThrows(NoSuchElementException.class, () -> carService.getCarById(id));
     }
+
 }

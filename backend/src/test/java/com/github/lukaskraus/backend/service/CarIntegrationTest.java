@@ -115,7 +115,6 @@ class CarIntegrationTest {
                 andExpect(status().isOk());
     }
 
-
     @DirtiesContext
     @WithMockUser
     @Test

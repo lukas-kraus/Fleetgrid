@@ -15,7 +15,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import {ToastContainer} from "react-toastify";
 
 function App() {
-    const {user, login, logout, isLoggedIn} = useUser()
+    const {user, login, logout, isLoggedIn, userDetails} = useUser()
     const [cars, setCars] = useState<Car[]>([])
     const authenticated = user !== undefined && user !== 'anonymousUser'
 
@@ -68,18 +68,19 @@ function App() {
             })
             .catch(() => console.error("Couldn't delete car"));
     }
+
     return (
         <>
             <BrowserRouter>
                 {authenticated ? (
                     <Header onLogout={logoutUser}
-                            user={user}
+                            userDetails={userDetails}
                     />
                 ) : null}
                 <Routes>
                     <Route path='/login' element={<Login onLogin={login}/>}/>
                     <Route element={<ProtectedRoutes user={user} isLoggedIn={isLoggedIn}/>}>
-                        <Route path="/" element={<Home user={user} cars={cars}/>}/>
+                        <Route path="/" element={<Home user={user} cars={cars} userDetails={userDetails}/>}/>
                         <Route path="/cars" element={<CarGallery cars={cars}/>}/>
                         <Route path="/cars/add" element={<AddCar addCar={addCar}/>}/>
                         <Route path="/cars/:id" element={<CarDetails deleteCar={deleteCar}/>}/>
