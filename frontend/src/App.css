@@ -94,7 +94,7 @@ select {
     background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
     background-repeat: no-repeat;
     padding: 20px;
-    margin: 0;
+    margin: 10px 0 10px 0;
     border: none;
     border-radius: 10px;
     display: inline-block;

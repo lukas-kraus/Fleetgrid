@@ -112,9 +112,9 @@ export default function EditCar(props: Props) {
                 </select>
                 <select name="driver" value={car.driver} onChange={onChange}>
                     <option value="">No Driver</option>
-                    {drivers.map((driver) => (
+                    {drivers.sort((a, b) => a.lastname.localeCompare(b.lastname)).map((driver) => (
                         <option key={driver.id} value={driver.id}>
-                            {driver.firstname} {driver.lastname}
+                            {driver.lastname} {driver.firstname}
                         </option>
                     ))}
                 </select>
