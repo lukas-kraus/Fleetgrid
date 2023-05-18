@@ -29,7 +29,6 @@ function App() {
         // eslint-disable-next-line
     }, [authenticated])
 
-
     return (
         <>
             <BrowserRouter>

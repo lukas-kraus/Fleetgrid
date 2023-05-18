@@ -1,7 +1,6 @@
 package com.github.lukaskraus.backend.service;
 
 import com.github.lukaskraus.backend.model.Car;
-import com.github.lukaskraus.backend.model.Driver;
 import com.github.lukaskraus.backend.model.Status;
 import com.github.lukaskraus.backend.repo.CarRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +29,7 @@ class CarIntegrationTest {
 
     @BeforeEach
     void addCarToRepo() {
-        carRepo.save(new Car("999", "Käfer", "A-BC-123", "black", Status.PARKED, new Driver("1234", "Max", "Mustermann")));
+        carRepo.save(new Car("999", "Käfer", "A-BC-123", "black", Status.PARKED, "182391238"));
     }
 
     @WithMockUser

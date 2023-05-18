@@ -1,45 +1,40 @@
-import {Car} from "../../model/Car";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import axios from "axios";
 import {wait} from "@testing-library/user-event/dist/utils";
 import './CarDetails.css';
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {toast} from "react-toastify";
 import {toastConfig} from "../../hooks/toastConfig";
+import useCars from "../../hooks/useCars";
+import useDrivers from "../../hooks/useDrivers";
 
 type Props = {
     deleteCar: (id: string) => void;
 };
 
 export default function CarDetails(props: Props) {
-
-    const [car, setCar] = useState<Car>()
-    const {id} = useParams<{ id: string }>()
+    const {car, loadCarById} = useCars();
+    const {loadDriverById, driver} = useDrivers();
+    const {id} = useParams<{ id: string }>();
     const navigate = useNavigate();
 
     useEffect(() => {
         if (id) {
-            loadCarById(id)
+            loadCarById(id);
         }
         // eslint-disable-next-line
-    }, [])
-
-    function loadCarById(id: string) {
-        axios.get('/api/cars/' + id)
-            .then((response) => {
-                setCar(response.data)
-            })
-            .catch((r) => {
-                toast.error("Couldn't load car: " + r, toastConfig)
-            })
-    }
+    }, []);
+    useEffect(() => {
+        if (car?.driver) {
+            loadDriverById(car?.driver)
+        } // eslint-disable-next-line
+    }, [car]);
 
     function onDeleteClick() {
         if (car) {
             props.deleteCar(car.id);
-            wait(500).then(() => navigate("/cars"))
-            toast.success(car.license_plate + " was successfully deleted", toastConfig)
+            wait(500).then(() => navigate('/cars'));
+            toast.success(car.license_plate + ' was successfully deleted', toastConfig);
         }
     }
 
@@ -48,23 +43,41 @@ export default function CarDetails(props: Props) {
             {car ? (
                 <>
                     <h1>
-                        <span>
-                            <Link to="/cars">Cars</Link>
-                            <ArrowForwardIosIcon/>
-                        </span>
+            <span>
+              <Link to="/cars">Cars</Link>
+              <ArrowForwardIosIcon/>
+            </span>
                         {car.license_plate}
                     </h1>
                     <ul>
-                        <li><b>License plate:</b> {car.license_plate}</li>
-                        <li><b>Color:</b> {car.color}</li>
-                        <li><b>ID:</b> {car.id}</li>
+                        <li>
+                            <b>License plate:</b> {car.license_plate}
+                        </li>
+                        <li>
+                            <b>Color:</b> {car.color}
+                        </li>
+                        <li>
+                            <b>ID:</b> {car.id}
+                        </li>
+                        <li>
+                            <b>Status:</b> {car.status}
+                        </li>
+                        {car.driver ? (
+                            <li>
+                                <b>Driver:</b> {driver ? driver.firstname + " " + driver.lastname : 'Loading driver ...'}
+                            </li>
+                        ) : null}
                     </ul>
-                    <Link to={`/cars/${car.id}/edit`} className="button-link">Edit</Link>
-                    <Link to="#" onClick={onDeleteClick} className="button-link">Delete</Link>
+                    <Link to={`/cars/${car.id}/edit`} className="button-link">
+                        Edit
+                    </Link>
+                    <Link to="#" onClick={onDeleteClick} className="button-link">
+                        Delete
+                    </Link>
                 </>
             ) : (
-                <h1>Loading ...</h1>
+                <h1>Loading car ...</h1>
             )}
         </div>
-    )
+    );
 }

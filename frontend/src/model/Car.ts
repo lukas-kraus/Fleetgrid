@@ -1,12 +1,10 @@
-import {Driver} from "./Driver";
-
 export type Car = {
     id: string,
     model: string,
     license_plate: string,
     color: string,
     status: string,
-    driver: Driver
+    driver: string
 }
 
 export type NewCar = {
