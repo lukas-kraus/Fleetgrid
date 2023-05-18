@@ -24,6 +24,7 @@ export default function CarDetails(props: Props) {
         }
         // eslint-disable-next-line
     }, []);
+
     useEffect(() => {
         if (car?.driver) {
             loadDriverById(car?.driver)

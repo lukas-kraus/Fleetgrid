@@ -44,7 +44,7 @@ export default function AddDriver(props: Props) {
                        }}/>
                 <input type="text"
                        value={firstname}
-                       placeholder="First namex"
+                       placeholder="First name"
                        required
                        onChange={(event) => {
                            setFirstname(event.target.value)

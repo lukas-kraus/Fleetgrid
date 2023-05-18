@@ -23,16 +23,24 @@ export default function useDrivers() {
             .catch(() => console.error("Couldn't add new driver"));
     }
 
+    function deleteDriver(id: string) {
+        axios.delete("/api/driver/" + id)
+            .then(() => {
+                setDrivers(drivers.filter((driver) => driver.id !== id))
+            })
+            .catch(() => console.error("Couldn't delete driver"));
+    }
+
     function loadDriverById(id: string) {
         axios
             .get('/api/driver/' + id)
             .then((response) => {
                 setDriver(response.data);
             })
-            .catch((r) => {
-                toast.error("Couldn't load driver: " + r, toastConfig);
+            .catch(() => {
+                toast.error("Couldn't find driver", toastConfig);
             });
     }
 
-    return {drivers, loadAllDrivers, loadDriverById, driver, addDriver}
+    return {drivers, loadAllDrivers, loadDriverById, driver, addDriver, deleteDriver}
 }

@@ -15,11 +15,12 @@ import DriverGallery from "./components/driver/DriverGallery";
 import useDrivers from "./hooks/useDrivers";
 import useCars from "./hooks/useCars";
 import AddDriver from "./components/driver/AddDriver";
+import DriverDetails from "./components/driver/DriverDetails";
 
 function App() {
     const {user, login, logoutUser, isLoggedIn, userDetails} = useUser()
     const {loadAllCars, addCar, editCar, deleteCar, cars} = useCars()
-    const {drivers, loadAllDrivers, addDriver} = useDrivers()
+    const {drivers, loadAllDrivers, addDriver, deleteDriver} = useDrivers()
     const authenticated = user !== undefined && user !== 'anonymousUser'
 
     useEffect(() => {
@@ -48,6 +49,7 @@ function App() {
                         <Route path="/cars/:id/edit" element={<EditCar editCar={editCar}/>}/>
                         <Route path="/drivers" element={<DriverGallery drivers={drivers}/>}/>
                         <Route path="/drivers/add" element={<AddDriver addDriver={addDriver}/>}/>
+                        <Route path="/drivers/:id" element={<DriverDetails deleteDriver={deleteDriver}/>}/>
                     </Route>
                 </Routes>
             </BrowserRouter>

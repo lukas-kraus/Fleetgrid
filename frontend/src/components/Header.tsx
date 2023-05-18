@@ -39,8 +39,8 @@ export default function Header(props: Props) {
             <div className="separator"></div>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/cars">Cars</NavLink>
-            <NavLink to="/trips">Trips</NavLink>
             <NavLink to="/drivers">Drivers</NavLink>
+            <NavLink to="/trips">Trips</NavLink>
             <NavLink to="/settings">Settings</NavLink>
             <div className="user">
                 <NavLink to="#">
