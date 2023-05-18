@@ -36,7 +36,7 @@ export default function DriverDetails(props: Props) {
                 <>
                     <h1>
             <span>
-              <Link to="/cars">Cars</Link>
+              <Link to="/drivers">Drivers</Link>
               <ArrowForwardIosIcon/>
             </span>
                         {driver.lastname} {driver.firstname}

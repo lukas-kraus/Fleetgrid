@@ -31,6 +31,19 @@ export default function useDrivers() {
             .catch(() => console.error("Couldn't delete driver"));
     }
 
+    function editDriver(driver: Driver) {
+        axios
+            .put(`/api/driver/${driver.id}`, driver)
+            .then(() => {
+                setDrivers((prevDrivers) =>
+                    prevDrivers.map((currentDriver) =>
+                        currentDriver.id === driver.id ? driver : currentDriver
+                    )
+                );
+            })
+            .catch((error) => console.error("Couldn't update driver:", error));
+    }
+
     function loadDriverById(id: string) {
         axios
             .get('/api/driver/' + id)
@@ -42,5 +55,5 @@ export default function useDrivers() {
             });
     }
 
-    return {drivers, loadAllDrivers, loadDriverById, driver, addDriver, deleteDriver}
+    return {drivers, loadAllDrivers, loadDriverById, driver, addDriver, deleteDriver, editDriver}
 }
