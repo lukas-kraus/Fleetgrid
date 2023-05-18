@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useState} from "react";
-import {Driver} from "../model/Driver";
+import {Driver, NewDriver} from "../model/Driver";
 import {toast} from "react-toastify";
 import {toastConfig} from "./toastConfig";
 
@@ -17,6 +17,12 @@ export default function useDrivers() {
             .catch(() => console.error("Couldn't load all drivers"));
     }
 
+    function addDriver(newDriver: NewDriver) {
+        axios.post("/api/driver", newDriver)
+            .then(() => loadAllDrivers())
+            .catch(() => console.error("Couldn't add new driver"));
+    }
+
     function loadDriverById(id: string) {
         axios
             .get('/api/driver/' + id)
@@ -28,5 +34,5 @@ export default function useDrivers() {
             });
     }
 
-    return {drivers, loadAllDrivers, loadDriverById, driver}
+    return {drivers, loadAllDrivers, loadDriverById, driver, addDriver}
 }
