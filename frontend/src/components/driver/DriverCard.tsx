@@ -9,8 +9,8 @@ export default function DriverCard(props: Props) {
     return (
         <tbody>
         <tr>
-            <td><Link to={props.driver.id}>{props.driver.firstname}</Link></td>
-            <td>{props.driver.lastname}</td>
+            <td><Link to={props.driver.id}>{props.driver.lastname}</Link></td>
+            <td>{props.driver.firstname}</td>
         </tr>
         </tbody>
     )

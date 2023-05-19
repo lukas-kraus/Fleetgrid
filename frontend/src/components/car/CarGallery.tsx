@@ -22,7 +22,6 @@ export default function CarGallery(props: Props) {
                     <th>Model</th>
                     <th>Color</th>
                     <th>Status</th>
-                    <th>Driver</th>
                 </tr>
                 </thead>
                 {

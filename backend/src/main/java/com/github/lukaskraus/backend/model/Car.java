@@ -9,6 +9,6 @@ public record Car(
         String license_plate,
         String color,
         Status status,
-        Driver driver
+        String driver
 ) {
 }

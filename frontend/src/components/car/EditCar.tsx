@@ -7,6 +7,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {toastConfig} from "../../hooks/toastConfig";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import useDrivers from "../../hooks/useDrivers";
 
 type Props = {
     editCar: (newCar: Car) => void
@@ -20,23 +21,26 @@ export default function EditCar(props: Props) {
         license_plate: "",
         color: "",
         status: "",
-        driver: {
-            id: "",
-            firstname: "",
-            lastname: ""
-        }
+        driver: ""
     }
 
     const [car, setCar] = useState<Car>(initialState)
+    const {loadDriverById, loadAllDrivers, drivers} = useDrivers();
     const {id} = useParams<{ id: string }>()
 
     useEffect(() => {
             if (id) {
                 loadCarById(id)
+                loadAllDrivers()
             }
         }, // eslint-disable-next-line
         []
     )
+    useEffect(() => {
+        if (car?.driver) {
+            loadDriverById(car?.driver)
+        } // eslint-disable-next-line
+    }, [car]);
 
     function loadCarById(id: string) {
         axios.get('/api/cars/' + id)
@@ -63,9 +67,11 @@ export default function EditCar(props: Props) {
         const targetName: string = event.target.name;
         const value: string = event.target.value;
         if (id) {
-            setCar(
-                {...car, id: id, [targetName]: value}
-            )
+            setCar({
+                ...car,
+                id: id,
+                [targetName]: value,
+            });
         }
     }
 
@@ -104,6 +110,18 @@ export default function EditCar(props: Props) {
                     <option value="OTW">On the way</option>
                     <option value="CHARGING">Charging</option>
                 </select>
+                {car.status === 'OTW' && (
+                    <select name="driver" value={car.driver} onChange={onChange}>
+                        <option value="">No Driver</option>
+                        {drivers
+                            .sort((a, b) => a.lastname.localeCompare(b.lastname))
+                            .map((driver) => (
+                                <option key={driver.id} value={driver.id}>
+                                    {driver.lastname} {driver.firstname}
+                                </option>
+                            ))}
+                    </select>
+                )}
                 <button className="button">Update</button>
             </form>
         </div>

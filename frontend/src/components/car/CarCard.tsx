@@ -13,7 +13,6 @@ export default function CarCard(props: Props) {
             <td>{props.car.model}</td>
             <td>{props.car.color}</td>
             <td>{props.car.status}</td>
-            <td>{props.car.driver?.firstname} {props.car.driver?.lastname}</td>
         </tr>
         </tbody>
     )

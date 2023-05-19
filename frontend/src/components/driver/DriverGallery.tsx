@@ -17,8 +17,8 @@ export default function DriverGallery(props: Props) {
             <table>
                 <thead>
                 <tr>
-                    <th>First name</th>
                     <th>Last name</th>
+                    <th>First name</th>
                 </tr>
                 </thead>
                 {

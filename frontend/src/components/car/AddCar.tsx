@@ -10,7 +10,7 @@ type AddCarProps = {
 }
 
 export default function AddCar(props: AddCarProps) {
-    const [model, setModel] = useState<string>('')
+    const [model, setModel] = useState<string>("")
     const [license_plate, setLicensePlate] = useState<string>("")
     const [color, setColor] = useState<string>("")
     const [status, setStatus] = useState<string>("")

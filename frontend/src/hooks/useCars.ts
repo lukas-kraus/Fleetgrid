@@ -1,10 +1,13 @@
 import {useState} from "react";
 import axios from "axios";
 import {Car, NewCar} from "../model/Car";
+import {toast} from "react-toastify";
+import {toastConfig} from "./toastConfig";
 
 export default function useCars() {
 
     const [cars, setCars] = useState<Car[]>([])
+    const [car, setCar] = useState<Car>();
 
     function loadAllCars() {
         axios.get("/api/cars")
@@ -42,5 +45,16 @@ export default function useCars() {
             .catch(() => console.error("Couldn't delete car"));
     }
 
-    return {loadAllCars, addCar, editCar, deleteCar, cars}
+    function loadCarById(id: string) {
+        axios
+            .get('/api/cars/' + id)
+            .then((response) => {
+                setCar(response.data)
+            })
+            .catch((r) => {
+                toast.error("Couldn't load car: " + r, toastConfig);
+            });
+    }
+
+    return {loadAllCars, addCar, editCar, deleteCar, cars, loadCarById, car}
 }
