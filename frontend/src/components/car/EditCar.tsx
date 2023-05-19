@@ -110,14 +110,18 @@ export default function EditCar(props: Props) {
                     <option value="OTW">On the way</option>
                     <option value="CHARGING">Charging</option>
                 </select>
-                <select name="driver" value={car.driver} onChange={onChange}>
-                    <option value="">No Driver</option>
-                    {drivers.sort((a, b) => a.lastname.localeCompare(b.lastname)).map((driver) => (
-                        <option key={driver.id} value={driver.id}>
-                            {driver.lastname} {driver.firstname}
-                        </option>
-                    ))}
-                </select>
+                {car.status === 'OTW' && (
+                    <select name="driver" value={car.driver} onChange={onChange}>
+                        <option value="">No Driver</option>
+                        {drivers
+                            .sort((a, b) => a.lastname.localeCompare(b.lastname))
+                            .map((driver) => (
+                                <option key={driver.id} value={driver.id}>
+                                    {driver.lastname} {driver.firstname}
+                                </option>
+                            ))}
+                    </select>
+                )}
                 <button className="button">Update</button>
             </form>
         </div>
