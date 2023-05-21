@@ -11,6 +11,10 @@
     height: 100%;
 }
 
+.login-page form {
+    width: 85%;
+}
+
 .login-page .box {
     border-radius: 20px;
     position: absolute;
@@ -34,10 +38,18 @@
 }
 
 .login-page .box input {
-    width: 85%
+    width: 100%;
 }
 
 .login-page .box button {
-    width: 100%
+    width: 118%;
 }
 
+@media only screen and (max-width: 790px) {
+    .login-page .logo {
+        top: 20%;
+        left: 52%;
+        width: 200px;
+        height: 200px;
+    }
+}

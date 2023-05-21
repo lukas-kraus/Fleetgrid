@@ -40,8 +40,6 @@ export default function Header(props: Props) {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/cars">Cars</NavLink>
             <NavLink to="/drivers">Drivers</NavLink>
-            <NavLink to="/trips">Trips</NavLink>
-            <NavLink to="/settings">Settings</NavLink>
             <div className="user">
                 <NavLink to="#">
                     <AccountCircleIcon/> <span>{props.userDetails?.firstname}</span>
