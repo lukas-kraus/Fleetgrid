@@ -1,7 +1,8 @@
-import {FormEvent, useState} from "react";
+import {FormEvent, useState, useEffect, useRef} from "react";
 import {useNavigate} from "react-router-dom";
 import './Login.css';
-import logo from '../logo.png'
+import logo from '../logo.png';
+import backgroundVideo from '../images/video.mp4';
 import {toastConfig} from "../hooks/toastConfig";
 import {toast} from "react-toastify";
 
@@ -10,13 +11,21 @@ type Props = {
 }
 
 export default function Login(props: Props) {
-
-    const [username, setUsername] = useState<string>("")
-    const [password, setPassword] = useState<string>("")
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
     const navigate = useNavigate();
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.play().catch(error => {
+                console.error("Video playback failed: ", error);
+            });
+        }
+    }, []);
 
     function onSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault()
+        event.preventDefault();
         if (!username || !password) {
             toast.error("Please fill in all fields", toastConfig);
             return;
@@ -25,14 +34,17 @@ export default function Login(props: Props) {
             .then(() => {
                 navigate("/");
             })
-            .catch((r) => {
-                console.log("FEHLER: " + r)
-                toast.error("Couldn't login " + r, toastConfig)
+            .catch((error) => {
+                console.error("Error logging in: ", error);
+                toast.error("Couldn't login " + error, toastConfig);
             });
     }
 
     return (
         <div className="login-page">
+            <video ref={videoRef} autoPlay loop muted>
+                <source src={backgroundVideo} type="video/mp4"/>
+            </video>
             <img src={logo} className="logo" alt="Fleetgrid"/>
             <div className="box">
                 <form onSubmit={onSubmit}>
@@ -44,5 +56,5 @@ export default function Login(props: Props) {
                 </form>
             </div>
         </div>
-    )
+    );
 }
