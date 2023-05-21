@@ -43,7 +43,7 @@ export default function CarGallery(props: Props) {
                   className={
                       `chip ${
                           filterStatus === "otw"
-                              ? "active"
+                              ? "active-otw"
                               : ""
                       }`
                   }
@@ -57,7 +57,7 @@ export default function CarGallery(props: Props) {
                   className={
                       `chip ${
                           filterStatus === "charging"
-                              ? "active"
+                              ? "active-charging"
                               : ""
                       }`
                   }
@@ -71,7 +71,7 @@ export default function CarGallery(props: Props) {
                   className={
                       `chip ${
                           filterStatus === "parked"
-                              ? "active"
+                              ? "active-parked"
                               : ""
                       }`
                   }

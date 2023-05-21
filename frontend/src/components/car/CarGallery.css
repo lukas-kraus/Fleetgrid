@@ -6,6 +6,21 @@
     background: #ccc;
 }
 
+.filter a.active-otw {
+    background: rgba(103, 173, 91, 0.3);
+    color: rgba(103, 173, 91, 1);
+}
+
+.filter a.active-parked {
+    background: rgba(93, 163, 188, 0.3);
+    color: rgba(93, 163, 188, 1);
+}
+
+.filter a.active-charging {
+    background: rgba(217, 180, 65, 0.3);
+    color: rgba(217, 180, 65, 1);
+}
+
 table {
     width: 100%;
     text-align: left;
