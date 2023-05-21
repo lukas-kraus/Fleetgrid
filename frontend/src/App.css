@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+:root {
+    --otw: rgba(103, 173, 91, 1);
+    --parked: rgba(93, 163, 188, 1);
+    --charging: rgba(217, 180, 65, 1);
+}
+
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -142,4 +148,38 @@ select {
     box-sizing: border-box;
     -webkit-appearance: none;
     -moz-appearance: none;
+}
+
+
+table {
+    width: 100%;
+    text-align: left;
+    border-spacing: 0;
+}
+
+thead tr th {
+    width: 20%;
+    padding: 25px 10px;
+    font-size: 0.6em;
+    color: #3D3F41;
+    border-bottom: 1px solid #CCC;
+}
+
+tbody:hover {
+    background: #F5F5F5;
+}
+
+tbody tr td {
+    padding: 20px 10px;
+    border: none;
+}
+
+table .status * {
+    padding: 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-size: 0.6em;
+    font-weight: 600;
+    border: 1px solid;
+    color: #CCC;
 }
