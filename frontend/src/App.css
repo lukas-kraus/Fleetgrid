@@ -150,11 +150,14 @@ select {
     -moz-appearance: none;
 }
 
-
 table {
     width: 100%;
     text-align: left;
     border-spacing: 0;
+}
+
+table tr {
+    cursor: pointer;
 }
 
 thead tr th {
@@ -163,6 +166,7 @@ thead tr th {
     font-size: 0.6em;
     color: #3D3F41;
     border-bottom: 1px solid #CCC;
+    cursor: auto;
 }
 
 tbody:hover {
