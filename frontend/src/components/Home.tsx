@@ -7,6 +7,7 @@ import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
 import {User} from "../model/User";
 import moment from "moment";
 import React from "react";
+import {Link} from "react-router-dom";
 
 type Props = {
     user: string | undefined
@@ -48,7 +49,7 @@ export default function Home(props: Props) {
                     </div>
                     <div className="text">
                         <h2>On the way</h2>
-                        <span className="number">{countCars("OTW")}</span>
+                        <span className="number"><Link to="/cars?status=otw">{countCars("OTW")}</Link></span>
                     </div>
                 </div>
                 <div className="stat">
@@ -57,7 +58,7 @@ export default function Home(props: Props) {
                     </div>
                     <div className="text">
                         <h2>Parked</h2>
-                        <span className="number">{countCars("Parked")}</span>
+                        <span className="number"><Link to="/cars?status=parked">{countCars("Parked")}</Link></span>
                     </div>
                 </div>
                 <div className="stat">
@@ -66,7 +67,7 @@ export default function Home(props: Props) {
                     </div>
                     <div className="text">
                         <h2>Charging</h2>
-                        <span className="number">{countCars("Charging")}</span>
+                        <span className="number"><Link to="/cars?status=charging">{countCars("Charging")}</Link></span>
                     </div>
                 </div>
                 <div className="stat">
@@ -75,7 +76,7 @@ export default function Home(props: Props) {
                     </div>
                     <div className="text">
                         <h2>In Total</h2>
-                        <span className="number">{countCars("")}</span>
+                        <span className="number"><Link to="/cars">{countCars("")}</Link></span>
                     </div>
                 </div>
             </div>
