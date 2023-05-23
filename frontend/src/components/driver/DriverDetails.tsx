@@ -5,6 +5,8 @@ import useDrivers from "../../hooks/useDrivers";
 import {wait} from "@testing-library/user-event/dist/utils";
 import {toast} from "react-toastify";
 import {toastConfig} from "../../hooks/toastConfig";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 type Props = {
     deleteDriver: (id: string) => void;
@@ -49,12 +51,14 @@ export default function DriverDetails(props: Props) {
                             <b>First name:</b> {driver.firstname}
                         </li>
                     </ul>
-                    <Link to={`/drivers/${driver.id}/edit`} className="button-link">
-                        Edit
-                    </Link>
-                    <Link to="#" onClick={onDeleteClick} className="button-link">
-                        Delete
-                    </Link>
+                    <div className="flex">
+                        <Link to={`/drivers/${driver.id}/edit`} className="button-link">
+                            <EditIcon/>
+                        </Link>
+                        <Link to="#" onClick={onDeleteClick} className="button-link">
+                            <DeleteIcon/>
+                        </Link>
+                    </div>
                 </>
             ) : (
                 <h1>Loading driver ...</h1>
