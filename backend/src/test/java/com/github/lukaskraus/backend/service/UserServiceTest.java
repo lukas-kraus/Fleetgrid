@@ -1,10 +1,12 @@
 package com.github.lukaskraus.backend.service;
 
+import com.github.lukaskraus.backend.model.Address;
 import com.github.lukaskraus.backend.model.MongoUser;
 import com.github.lukaskraus.backend.repo.MongoUserRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -23,8 +25,10 @@ class UserServiceTest {
         String username = "randomuser";
         String password = "randompassword1";
         LocalDateTime lastLogin = LocalDateTime.now();
+        LocalDate birthday = LocalDate.of(1994, 3, 23);
+        Address address = new Address("Musterstrasse 1", "Musterstadt", "12345", "Germany");
 
-        MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", null, lastLogin);
+        MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", birthday, address, null, lastLogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
         UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);
@@ -39,8 +43,10 @@ class UserServiceTest {
         String username = "randomuser";
         String password = "randompassword1";
         LocalDateTime lastLogin = LocalDateTime.now();
+        LocalDate birthday = LocalDate.of(1994, 3, 23);
+        Address address = new Address("Musterstrasse 1", "Musterstadt", "12345", "Germany");
 
-        MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", null, lastLogin);
+        MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", birthday, address, null, lastLogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
         MongoUser actual = mongoUserDetailsService.getUserByUsername(username);
@@ -56,8 +62,10 @@ class UserServiceTest {
         String password = "randompassword1";
         LocalDateTime lastLogin = LocalDateTime.of(2023, 5, 16, 17, 30, 40, 50000);
         LocalDateTime newLastLogin = LocalDateTime.now();
+        LocalDate birthday = LocalDate.of(1994, 3, 23);
+        Address address = new Address("Musterstrasse 1", "Musterstadt", "12345", "Germany");
 
-        MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", lastLogin, newLastLogin);
+        MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", birthday, address, lastLogin, newLastLogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
         MongoUser actual = mongoUserDetailsService.getUserByUsername(username);
