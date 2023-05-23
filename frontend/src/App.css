@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+:root {
+    --otw: rgba(103, 173, 91, 1);
+    --parked: rgba(93, 163, 188, 1);
+    --charging: rgba(217, 180, 65, 1);
+}
+
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -21,7 +27,7 @@ main {
 a:link, a:visited {
     color: #000;
     text-decoration: none;
-    transition: all 100ms linear 100ms;
+    transition: all 100ms linear 80ms;
     padding: 0;
     margin: 0;
 }
@@ -50,7 +56,7 @@ form {
     width: 40%;
 }
 
-input, button.button, a.button-link {
+input, button.button {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: 1em;
@@ -63,7 +69,77 @@ input, button.button, a.button-link {
     border-radius: 10px;
 }
 
-button.button, a.button-link {
+.headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headline .button-link:last-child {
+    margin: 35px 15px 0 0;
+}
+
+a {
+    padding: 15px;
+    margin: 15px;
+}
+
+.detail {
+    display: inline-block;
+    padding: 20px;
+    width: 150px;
+    border-radius: 20px;
+    background: #FFF;
+    float: left;
+    margin: 30px 20px;
+}
+
+.detail h4 {
+    font-size: 2vmin;
+    color: #3D3F41;
+    line-height: 0;
+    font-weight: 600;
+    margin: 20px 0 30px 0;
+}
+
+.detail p {
+    line-height: 0;
+    font-size: 0.8em;
+    color: #878D93;
+}
+
+.clear {
+    clear: both;
+}
+
+.flex {
+    display: flex;
+}
+
+a.button-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 15px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+a.button-link:last-child {
+    margin-right: 0;
+}
+
+a.button-link svg {
+    font-size: 20px;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+button.button {
     width: 107%;
     text-transform: uppercase;
     font-weight: 600;
@@ -72,11 +148,6 @@ button.button, a.button-link {
     background: #253332;
     color: #FFFFFF;
     transition: all 100ms linear 100ms;
-}
-
-a.button-link {
-    width: 40%;
-    text-align: center;
 }
 
 a.chip {
@@ -142,4 +213,42 @@ select {
     box-sizing: border-box;
     -webkit-appearance: none;
     -moz-appearance: none;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+    border-spacing: 0;
+}
+
+table tr {
+    cursor: pointer;
+}
+
+thead tr th {
+    width: 20%;
+    padding: 25px 10px;
+    font-size: 0.6em;
+    color: #3D3F41;
+    border-bottom: 1px solid #CCC;
+    cursor: auto;
+}
+
+tbody:hover {
+    background: #F5F5F5;
+}
+
+tbody tr td {
+    padding: 20px 10px;
+    border: none;
+}
+
+table .status * {
+    padding: 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-size: 0.6em;
+    font-weight: 600;
+    border: 1px solid;
+    color: #CCC;
 }

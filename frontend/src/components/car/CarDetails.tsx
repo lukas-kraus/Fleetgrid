@@ -1,8 +1,9 @@
 import React, {useEffect} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {wait} from "@testing-library/user-event/dist/utils";
-import './CarDetails.css';
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import {toast} from "react-toastify";
 import {toastConfig} from "../../hooks/toastConfig";
 import useCars from "../../hooks/useCars";
@@ -21,8 +22,7 @@ export default function CarDetails(props: Props) {
     useEffect(() => {
         if (id) {
             loadCarById(id);
-        }
-        // eslint-disable-next-line
+        } // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -39,6 +39,14 @@ export default function CarDetails(props: Props) {
         }
     }
 
+    const statusAbbreviation: Record<string, string> = {
+        'OTW': 'On the way',
+        'PARKED': 'Parked',
+        'CHARGING': 'Charging'
+    };
+
+    const status: string = car?.status ? statusAbbreviation[car.status] || car.status : '';
+
     return (
         <div>
             {car ? (
@@ -50,31 +58,39 @@ export default function CarDetails(props: Props) {
             </span>
                         {car.license_plate}
                     </h1>
-                    <ul>
-                        <li>
-                            <b>License plate:</b> {car.license_plate}
-                        </li>
-                        <li>
-                            <b>Color:</b> {car.color}
-                        </li>
-                        <li>
-                            <b>ID:</b> {car.id}
-                        </li>
-                        <li>
-                            <b>Status:</b> {car.status}
-                        </li>
-                        {car.driver ? (
-                            <li>
-                                <b>Driver:</b> {driver ? driver.firstname + " " + driver.lastname : 'Loading driver ...'}
-                            </li>
-                        ) : null}
-                    </ul>
-                    <Link to={`/cars/${car.id}/edit`} className="button-link">
-                        Edit
-                    </Link>
-                    <Link to="#" onClick={onDeleteClick} className="button-link">
-                        Delete
-                    </Link>
+                    <div className="detail">
+                        <h4>{car.model}</h4>
+                        <p>Model</p>
+                    </div>
+                    <div className="detail">
+                        <h4>{car.color}</h4>
+                        <p>Color</p>
+                    </div>
+                    <div className="detail">
+                        <h4>{status}</h4>
+                        <p>Status</p>
+                    </div>
+                    {car.driver ? (
+                        <div className="detail">
+                            {driver ? (
+                                <h4>
+                                    <Link to={`/drivers/${driver.id}`}>{driver.firstname} {driver.lastname}</Link>
+                                </h4>
+                            ) : (
+                                <h4>Loading driver ...</h4>
+                            )}
+                            <p>Driver</p>
+                        </div>
+                    ) : null}
+                    <div className="clear"/>
+                    <div className="flex">
+                        <Link to={`/cars/${car.id}/edit`} className="button-link">
+                            <EditIcon/>
+                        </Link>
+                        <Link to="#" onClick={onDeleteClick} className="button-link">
+                            <DeleteIcon/>
+                        </Link>
+                    </div>
                 </>
             ) : (
                 <h1>Loading car ...</h1>

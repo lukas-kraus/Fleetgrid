@@ -1,7 +1,8 @@
-import {NavLink} from "react-router-dom";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import {Link} from "react-router-dom";
 import {Driver} from "../../model/Driver";
 import DriverCard from "./DriverCard";
+import AddIcon from "@mui/icons-material/Add";
+import React from "react";
 
 type Props = {
     drivers: Driver[]
@@ -10,9 +11,11 @@ type Props = {
 export default function DriverGallery(props: Props) {
     return (
         <>
-            <h1>Drivers</h1>
-            <div className="right">
-                <NavLink to="/drivers/add"><AddCircleIcon/></NavLink>
+            <div className="headline">
+                <h1>Drivers</h1>
+                <Link to="/drivers/add" className="button-link">
+                    <AddIcon/>
+                </Link>
             </div>
             <table>
                 <thead>
