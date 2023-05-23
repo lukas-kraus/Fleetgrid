@@ -10,7 +10,6 @@ import Login from "./components/Login";
 import useUser from "./hooks/useUser";
 import Home from "./components/Home";
 import ProtectedRoutes from "./ProtectedRoutes";
-import {ToastContainer} from "react-toastify";
 import DriverGallery from "./components/driver/DriverGallery";
 import useDrivers from "./hooks/useDrivers";
 import useCars from "./hooks/useCars";
@@ -55,7 +54,6 @@ function App() {
                     </Route>
                 </Routes>
             </BrowserRouter>
-            <ToastContainer/>
         </>
     )
         ;
