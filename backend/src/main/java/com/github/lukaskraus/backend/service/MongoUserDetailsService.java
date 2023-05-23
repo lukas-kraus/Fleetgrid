@@ -26,7 +26,12 @@ public class MongoUserDetailsService implements UserDetailsService {
         return new User(mongoUser.username(), mongoUser.password(), Collections.emptyList());
     }
 
+    public MongoUser editUser(MongoUser mongoUser) {
+        return mongoUserRepo.save(mongoUser);
+    }
+
     public MongoUser getUserByUsername(String username) {
         return mongoUserRepo.findMongoUserByUsername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
     }
+
 }

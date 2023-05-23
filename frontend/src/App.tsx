@@ -17,9 +17,10 @@ import useCars from "./hooks/useCars";
 import AddDriver from "./components/driver/AddDriver";
 import DriverDetails from "./components/driver/DriverDetails";
 import EditDriver from "./components/driver/EditDriver";
+import Account from "./components/settings/Account";
 
 function App() {
-    const {user, login, logoutUser, isLoggedIn, userDetails} = useUser()
+    const {user, login, logoutUser, isLoggedIn, userDetails, editUser} = useUser()
     const {loadAllCars, addCar, editCar, deleteCar, cars} = useCars()
     const {drivers, loadAllDrivers, addDriver, deleteDriver, editDriver} = useDrivers()
     const authenticated = user !== undefined && user !== 'anonymousUser'
@@ -52,6 +53,7 @@ function App() {
                         <Route path="/drivers/add" element={<AddDriver addDriver={addDriver}/>}/>
                         <Route path="/drivers/:id" element={<DriverDetails deleteDriver={deleteDriver}/>}/>
                         <Route path="/drivers/:id/edit" element={<EditDriver editDriver={editDriver}/>}/>
+                        <Route path="/account" element={<Account/>}/>
                     </Route>
                 </Routes>
             </BrowserRouter>

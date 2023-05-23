@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {User} from "../model/User";
+import {Driver} from "../model/Driver";
 
 export default function useUser() {
     const [user, setUser] = useState<string>();
@@ -61,6 +62,10 @@ export default function useUser() {
             .catch(() => console.error("Couldn't load all cars"));
     }
 
+    function editUser(user: User) {
+
+    }
+
     function logoutUser() {
         return new Promise<void>((resolve) => {
             logout();
@@ -68,5 +73,5 @@ export default function useUser() {
         });
     }
 
-    return {user, login, isLoggedIn, userDetails, logoutUser}
+    return {user, login, isLoggedIn, userDetails, editUser, logoutUser}
 }

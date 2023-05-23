@@ -32,5 +32,4 @@ public class DriverService {
     public void deleteDriver(String id) {
         driverRepo.deleteById(id);
     }
-
 }

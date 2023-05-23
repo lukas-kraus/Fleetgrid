@@ -42,6 +42,14 @@ public class UserController {
         return new MongoUserDTO(mongoUser.username(), mongoUser.firstname(), mongoUser.lastname(), mongoUser.lastLogin(), LocalDateTime.now());
     }
 
+    @PutMapping("/{username}")
+    MongoUser editUser(@PathVariable String username, @RequestBody MongoUser mongoUser) {
+        if (!mongoUser.username().equals(username)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Couldn't find user!");
+        }
+        return mongoUserDetailsService.editUser(mongoUser);
+    }
+
     @PostMapping("/login")
     public String login() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
