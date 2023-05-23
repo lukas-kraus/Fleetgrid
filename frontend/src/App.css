@@ -69,6 +69,16 @@ input, button.button {
     border-radius: 10px;
 }
 
+.headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headline .button-link:last-child {
+    margin: 35px 15px 0 0;
+}
+
 a {
     padding: 15px;
     margin: 15px;

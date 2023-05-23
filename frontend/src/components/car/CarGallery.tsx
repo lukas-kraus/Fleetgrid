@@ -1,8 +1,8 @@
 import {Car} from "../../model/Car";
-import {Link, NavLink, useSearchParams} from "react-router-dom";
+import {Link, useSearchParams} from "react-router-dom";
 import CarCard from "./CarCard";
 import "./CarGallery.css";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AddIcon from '@mui/icons-material/Add';
 import React, {useEffect, useState} from "react";
 import StreetviewIcon from "@mui/icons-material/Streetview";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
@@ -21,11 +21,11 @@ export default function CarGallery(props: Props) {
         // eslint-disable-next-line
     }, [currentStatus]);
     return (<>
-        <h1>Cars</h1>
-        <div className="right">
-            <NavLink to="/cars/add">
-                <AddCircleIcon/>
-            </NavLink>
+        <div className="headline">
+            <h1>Cars</h1>
+            <Link to="/cars/add" className="button-link">
+                <AddIcon/>
+            </Link>
         </div>
         <div className="filter">
             <Link to=""

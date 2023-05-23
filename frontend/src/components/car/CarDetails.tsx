@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {wait} from "@testing-library/user-event/dist/utils";
-import './CarDetails.css';
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
