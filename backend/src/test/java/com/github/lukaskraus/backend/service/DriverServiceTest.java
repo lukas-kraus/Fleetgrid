@@ -1,9 +1,11 @@
 package com.github.lukaskraus.backend.service;
 
+import com.github.lukaskraus.backend.model.Address;
 import com.github.lukaskraus.backend.model.Driver;
 import com.github.lukaskraus.backend.repo.DriverRepo;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -33,7 +35,10 @@ class DriverServiceTest {
     @Test
     void addDriver_verifyAddition() {
         // GIVEN
-        Driver actual = new Driver("123", "Max", "Mustermann");
+        LocalDate birthday = LocalDate.of(1994, 3, 23);
+        Address address = new Address("Musterstrasse 1", "Musterstadt", "12345", "Germany");
+        Driver actual = new Driver("123", "Max", "Mustermann", birthday, address);
+
         when(driverRepo.save(actual)).thenReturn(actual);
         // WHEN
         Driver expected = driverService.addDriver(actual);
@@ -46,7 +51,10 @@ class DriverServiceTest {
     void getDriverById_ExpectDriverById() {
         // GIVEN
         String id = "12345";
-        Driver expected = new Driver("123", "Angela", "Merkel");
+        LocalDate birthday = LocalDate.of(1994, 3, 23);
+        Address address = new Address("Musterstrasse 1", "Musterstadt", "12345", "Germany");
+
+        Driver expected = new Driver("123", "Angela", "Merkel", birthday, address);
         when(driverRepo.findById(id)).thenReturn(Optional.of(expected));
         // WHEN
         Driver actual = driverService.getDriverById(id);
@@ -69,7 +77,10 @@ class DriverServiceTest {
     void editDriverById() {
         // GIVEN
         String id = "123567";
-        Driver driver = new Driver("123", "Angela", "Merkel");
+        LocalDate birthday = LocalDate.of(1994, 3, 23);
+        Address address = new Address("Musterstrasse 1", "Musterstadt", "12345", "Germany");
+
+        Driver driver = new Driver("123", "Angela", "Merkel", birthday, address);
         when(driverRepo.findById(id)).thenReturn(Optional.of(driver));
         // WHEN
         driverService.editDriver(driver);
