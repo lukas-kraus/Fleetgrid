@@ -3,6 +3,8 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {wait} from "@testing-library/user-event/dist/utils";
 import './CarDetails.css';
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import {toast} from "react-toastify";
 import {toastConfig} from "../../hooks/toastConfig";
 import useCars from "../../hooks/useCars";
@@ -77,12 +79,14 @@ export default function CarDetails(props: Props) {
                         </div>
                     ) : null}
                     <div className="clear"/>
-                    <Link to={`/cars/${car.id}/edit`} className="button-link">
-                        Edit
-                    </Link>
-                    <Link to="#" onClick={onDeleteClick} className="button-link">
-                        Delete
-                    </Link>
+                    <div className="flex">
+                        <Link to={`/cars/${car.id}/edit`} className="button-link">
+                            <EditIcon/>
+                        </Link>
+                        <Link to="#" onClick={onDeleteClick} className="button-link">
+                            <DeleteIcon/>
+                        </Link>
+                    </div>
                 </>
             ) : (
                 <h1>Loading car ...</h1>

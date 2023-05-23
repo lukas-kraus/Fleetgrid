@@ -27,7 +27,7 @@ main {
 a:link, a:visited {
     color: #000;
     text-decoration: none;
-    transition: all 100ms linear 100ms;
+    transition: all 100ms linear 80ms;
     padding: 0;
     margin: 0;
 }
@@ -56,7 +56,7 @@ form {
     width: 40%;
 }
 
-input, button.button, a.button-link {
+input, button.button {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: 1em;
@@ -69,7 +69,34 @@ input, button.button, a.button-link {
     border-radius: 10px;
 }
 
-button.button, a.button-link {
+.flex {
+    display: flex;
+}
+
+a.button-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 15px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px; /* optionaler Abstand zwischen den Buttons */
+}
+
+a.button-link:last-child {
+    margin-right: 0; /* kein Abstand nach dem letzten Button */
+}
+
+a.button-link svg {
+    font-size: 20px;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+button.button {
     width: 107%;
     text-transform: uppercase;
     font-weight: 600;
@@ -78,11 +105,6 @@ button.button, a.button-link {
     background: #253332;
     color: #FFFFFF;
     transition: all 100ms linear 100ms;
-}
-
-a.button-link {
-    width: 40%;
-    text-align: center;
 }
 
 a.chip {
