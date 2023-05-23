@@ -21,8 +21,7 @@ export default function CarDetails(props: Props) {
     useEffect(() => {
         if (id) {
             loadCarById(id);
-        }
-        // eslint-disable-next-line
+        } // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -39,6 +38,15 @@ export default function CarDetails(props: Props) {
         }
     }
 
+    const statusAbbreviation: Record<string, string> = {
+        'OTW': 'On the way',
+        'PARKED': 'Parked',
+        'CHARGING': 'Charging'
+    };
+
+    const status: string = car?.status ? statusAbbreviation[car.status] || car.status : '';
+
+
     return (
         <div>
             {car ? (
@@ -50,25 +58,25 @@ export default function CarDetails(props: Props) {
             </span>
                         {car.license_plate}
                     </h1>
-                    <ul>
-                        <li>
-                            <b>License plate:</b> {car.license_plate}
-                        </li>
-                        <li>
-                            <b>Color:</b> {car.color}
-                        </li>
-                        <li>
-                            <b>ID:</b> {car.id}
-                        </li>
-                        <li>
-                            <b>Status:</b> {car.status}
-                        </li>
-                        {car.driver ? (
-                            <li>
-                                <b>Driver:</b> {driver ? driver.firstname + " " + driver.lastname : 'Loading driver ...'}
-                            </li>
-                        ) : null}
-                    </ul>
+                    <div className="detail">
+                        <h4>{car.model}</h4>
+                        <p>Model</p>
+                    </div>
+                    <div className="detail">
+                        <h4>{car.color}</h4>
+                        <p>Color</p>
+                    </div>
+                    <div className="detail">
+                        <h4>{status}</h4>
+                        <p>Status</p>
+                    </div>
+                    {car.driver ? (
+                        <div className="detail">
+                            <h4>{driver ? driver.firstname + " " + driver.lastname : 'Loading driver ...'}</h4>
+                            <p>Driver</p>
+                        </div>
+                    ) : null}
+                    <div className="clear"/>
                     <Link to={`/cars/${car.id}/edit`} className="button-link">
                         Edit
                     </Link>

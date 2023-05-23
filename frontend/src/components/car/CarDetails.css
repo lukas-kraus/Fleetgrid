@@ -2,3 +2,31 @@ a {
     padding: 15px;
     margin: 15px;
 }
+
+.detail {
+    display: inline-block;
+    padding: 20px;
+    width: 150px;
+    border-radius: 20px;
+    background: #FFF;
+    float: left;
+    margin: 30px 20px;
+}
+
+.detail h4 {
+    font-size: 2vmin;
+    color: #3D3F41;
+    line-height: 0;
+    font-weight: 600;
+    margin: 20px 0 30px 0;
+}
+
+.detail p {
+    line-height: 0;
+    font-size: 0.8em;
+    color: #878D93;
+}
+
+.clear {
+    clear: both;
+}
