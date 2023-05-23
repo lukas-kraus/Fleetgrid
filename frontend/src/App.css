@@ -150,6 +150,10 @@ button.button {
     transition: all 100ms linear 100ms;
 }
 
+.react-datepicker__input-container input {
+    margin: 0;
+}
+
 a.chip {
     display: inline-flex;
     align-items: center;

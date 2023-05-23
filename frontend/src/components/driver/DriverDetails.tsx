@@ -7,6 +7,7 @@ import {toast} from "react-toastify";
 import {toastConfig} from "../../hooks/toastConfig";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import moment from "moment";
 
 type Props = {
     deleteDriver: (id: string) => void;
@@ -14,6 +15,7 @@ type Props = {
 
 export default function DriverDetails(props: Props) {
     const {driver, loadDriverById} = useDrivers();
+
     const {id} = useParams<{ id: string }>();
     const navigate = useNavigate();
 
@@ -22,7 +24,7 @@ export default function DriverDetails(props: Props) {
             loadDriverById(id);
         }
         // eslint-disable-next-line
-    }, []);
+    }, [id]);
 
     function onDeleteClick() {
         if (driver) {
@@ -43,14 +45,23 @@ export default function DriverDetails(props: Props) {
             </span>
                         {driver.lastname} {driver.firstname}
                     </h1>
-                    <ul>
-                        <li>
-                            <b>Last name:</b> {driver.lastname}
-                        </li>
-                        <li>
-                            <b>First name:</b> {driver.firstname}
-                        </li>
-                    </ul>
+                    <div className="detail">
+                        <h4>{moment(driver.birthday).format('DD.MM.YYYY')}</h4>
+                        <p>Date of birth</p>
+                    </div>
+                    <div className="detail">
+                        <h4>{driver.address.street}</h4>
+                        <p>Street</p>
+                    </div>
+                    <div className="detail">
+                        <h4>{driver.address.postalCode} {driver.address.city}</h4>
+                        <p>City</p>
+                    </div>
+                    <div className="detail">
+                        <h4>{driver.address.country}</h4>
+                        <p>Country</p>
+                    </div>
+                    <div className="clear"/>
                     <div className="flex">
                         <Link to={`/drivers/${driver.id}/edit`} className="button-link">
                             <EditIcon/>

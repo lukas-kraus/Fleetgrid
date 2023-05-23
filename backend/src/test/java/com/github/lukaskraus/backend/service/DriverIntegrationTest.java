@@ -1,5 +1,6 @@
 package com.github.lukaskraus.backend.service;
 
+import com.github.lukaskraus.backend.model.Address;
 import com.github.lukaskraus.backend.model.Driver;
 import com.github.lukaskraus.backend.repo.DriverRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.time.LocalDate;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -29,7 +32,9 @@ class DriverIntegrationTest {
 
     @BeforeEach
     void addDriverToRepo() {
-        driverRepo.save(new Driver("123", "Max", "Mustermann"));
+        LocalDate birthday = LocalDate.of(1994, 3, 23);
+        Address address = new Address("Musterstrasse 1", "Musterstadt", "12345", "Germany");
+        driverRepo.save(new Driver("123", "Max", "Mustermann", birthday, address));
     }
 
     @WithMockUser
@@ -41,7 +46,14 @@ class DriverIntegrationTest {
                         [{
                             "id": "123",
                             "firstname": "Max",
-                            "lastname": "Mustermann"
+                            "lastname": "Mustermann",
+                            "birthday": "1994-03-23",
+                            "address": {
+                                "street": "Musterstrasse 1",
+                                "city": "Musterstadt",
+                                "postalCode": "12345",
+                                "country": "Germany"
+                            }
                         }]
                          """));
     }
@@ -55,7 +67,14 @@ class DriverIntegrationTest {
                                 {
                                     "id": "123",
                                     "firstname": "Max",
-                                    "lastname": "Mustermann"
+                                    "lastname": "Mustermann",
+                                    "birthday": "1994-03-23",
+                                    "address": {
+                                        "street": "Musterstrasse 1",
+                                        "city": "Musterstadt",
+                                        "postalCode": "12345",
+                                        "country": "Germany"
+                                    }
                                 }
                                 """)
                         .with(csrf()))
@@ -86,7 +105,14 @@ class DriverIntegrationTest {
                                     {
                                     "id": "123",
                                     "firstname": "Max",
-                                    "lastname": "Mustermann"
+                                    "lastname": "Mustermann",
+                                    "birthday": "1994-03-23",
+                                    "address": {
+                                        "street": "Musterstrasse 1",
+                                        "city": "Musterstadt",
+                                        "postalCode": "12345",
+                                        "country": "Germany"
+                                        }
                                     }
                         """));
     }
@@ -101,7 +127,14 @@ class DriverIntegrationTest {
                                 {
                                     "id": "213",
                                     "firstname": "Angela",
-                                    "lastname": "Merkel"
+                                    "lastname": "Merkel",
+                                    "birthday": "1994-03-23",
+                                    "address": {
+                                        "street": "Musterstrasse 1",
+                                        "city": "Musterstadt",
+                                        "postalCode": "12345",
+                                        "country": "Germany"
+                                        }
                                 }
                                 """).with(csrf())).
                 andExpect(status().isOk());
@@ -117,7 +150,14 @@ class DriverIntegrationTest {
                                 {
                                     "id": "213",
                                     "firstname": "Hansi",
-                                    "lastname": "Hintersee"
+                                    "lastname": "Hintersee",
+                                    "birthday": "1994-03-23",
+                                    "address": {
+                                        "street": "Musterstrasse 1",
+                                        "city": "Musterstadt",
+                                        "postalCode": "12345",
+                                        "country": "Germany"
+                                        }
                                 }
                                 """).with(csrf())).
                 andExpect(status().isBadRequest());
