@@ -47,7 +47,6 @@ export default function CarDetails(props: Props) {
 
     const status: string = car?.status ? statusAbbreviation[car.status] || car.status : '';
 
-
     return (
         <div>
             {car ? (
@@ -73,7 +72,13 @@ export default function CarDetails(props: Props) {
                     </div>
                     {car.driver ? (
                         <div className="detail">
-                            <h4>{driver ? driver.firstname + " " + driver.lastname : 'Loading driver ...'}</h4>
+                            {driver ? (
+                                <h4>
+                                    <Link to={`/drivers/${driver.id}`}>{driver.firstname} {driver.lastname}</Link>
+                                </h4>
+                            ) : (
+                                <h4>Loading driver ...</h4>
+                            )}
                             <p>Driver</p>
                         </div>
                     ) : null}
