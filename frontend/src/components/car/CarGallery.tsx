@@ -17,7 +17,6 @@ export default function CarGallery(props: Props) {
     const [filterStatus, setFilterStatus] = useState(currentStatus);
     useEffect(() => {
         setFilterStatus(currentStatus);
-        console.log("Status: " + filterStatus)
         // eslint-disable-next-line
     }, [currentStatus]);
     return (<>

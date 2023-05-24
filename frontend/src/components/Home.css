@@ -1,3 +1,8 @@
+a.relativeTime {
+    font-weight: 600;
+    color: #3D3F41;
+}
+
 .stats {
     display: grid;
     justify-content: center;

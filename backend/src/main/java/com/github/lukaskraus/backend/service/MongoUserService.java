@@ -12,10 +12,10 @@ import java.util.Collections;
 import java.util.NoSuchElementException;
 
 @Service
-public class MongoUserDetailsService implements UserDetailsService {
+public class MongoUserService implements UserDetailsService {
     private final MongoUserRepo mongoUserRepo;
 
-    public MongoUserDetailsService(MongoUserRepo mongoUserRepo) {
+    public MongoUserService(MongoUserRepo mongoUserRepo) {
         this.mongoUserRepo = mongoUserRepo;
     }
 

@@ -8,6 +8,7 @@ import {User} from "../model/User";
 import moment from "moment";
 import React from "react";
 import {Link} from "react-router-dom";
+import {styled, Tooltip, tooltipClasses, TooltipProps} from "@mui/material";
 
 type Props = {
     user: string | undefined
@@ -30,16 +31,44 @@ export default function Home(props: Props) {
     let dayOutput;
 
     if (day.isSame(today, 'day') || day.isSame(yesterday, 'day')) {
-        dayOutput = "at " + convertTime;
+        if (day.isSame(today, 'day')) {
+            dayOutput = "Today";
+        } else if (day.isSame(yesterday, 'day')) {
+            dayOutput = "Yesterday";
+        }
+        dayOutput += " at " + convertTime;
     } else {
         dayOutput = lastLogin.format('DD.MM.YYYY [at] HH:mm');
     }
+
+    const HtmlTooltip = styled(({className, ...props}: TooltipProps) => (
+        <Tooltip {...props} classes={{popper: className}}/>
+    ))(({theme}) => ({
+        [`& .${tooltipClasses.tooltip}`]: {
+            backgroundColor: '#253332',
+            color: '#FFFFFF',
+            maxWidth: 220,
+            fontSize: theme.typography.pxToRem(14),
+            fontFamily: 'Inter',
+            boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px'
+        },
+    }));
 
     return (
         <>
             <h1>Hi {props.userDetails?.firstname} {props.userDetails?.lastname}!</h1>
             {props.userDetails?.lastLogin ? (
-                <p>Your last login was {relativeTime} ({dayOutput}).</p>
+                <p>Your last login was
+                    <HtmlTooltip
+                        title={
+                            <React.Fragment>
+                                {dayOutput}
+                            </React.Fragment>
+                        }
+                    >
+                        <Link to="#" className="relativeTime"> {relativeTime}</Link>
+                    </HtmlTooltip>
+                    .</p>
             ) : null
             }
             <div className="stats">

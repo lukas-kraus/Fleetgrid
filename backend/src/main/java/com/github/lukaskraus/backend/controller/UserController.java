@@ -3,7 +3,7 @@ package com.github.lukaskraus.backend.controller;
 import com.github.lukaskraus.backend.model.MongoUser;
 import com.github.lukaskraus.backend.model.MongoUserDTO;
 import com.github.lukaskraus.backend.repo.MongoUserRepo;
-import com.github.lukaskraus.backend.service.MongoUserDetailsService;
+import com.github.lukaskraus.backend.service.MongoUserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,12 @@ import java.util.Optional;
 public class UserController {
 
     private final MongoUserRepo mongoUserRepo;
-    private final MongoUserDetailsService mongoUserDetailsService;
+    private final MongoUserService mongoUserService;
 
     @Autowired
-    public UserController(MongoUserRepo mongoUserRepo, MongoUserDetailsService mongoUserDetailsService) {
+    public UserController(MongoUserRepo mongoUserRepo, MongoUserService mongoUserService) {
         this.mongoUserRepo = mongoUserRepo;
-        this.mongoUserDetailsService = mongoUserDetailsService;
+        this.mongoUserService = mongoUserService;
     }
 
     @GetMapping("/me")
@@ -38,7 +38,7 @@ public class UserController {
         if (!user.equals(username)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User is not authorized to perform this operation");
         }
-        MongoUser mongoUser = mongoUserDetailsService.getUserByUsername(username);
+        MongoUser mongoUser = mongoUserService.getUserByUsername(username);
         return new MongoUserDTO(mongoUser.username(), mongoUser.firstname(), mongoUser.lastname(), mongoUser.lastLogin(), LocalDateTime.now());
     }
 

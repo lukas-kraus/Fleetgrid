@@ -25,7 +25,7 @@ class UserIntegrationTest {
     MockMvc mockMvc;
 
     @Autowired
-    MongoUserDetailsService mongoUserDetailsService;
+    MongoUserService mongoUserService;
 
     @Autowired
     MongoUserRepo mongoUserRepo;
