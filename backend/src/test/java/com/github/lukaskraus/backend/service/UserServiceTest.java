@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 class UserServiceTest {
 
     MongoUserRepo mongoUserRepo = mock(MongoUserRepo.class);
-    MongoUserDetailsService mongoUserDetailsService = new MongoUserDetailsService(mongoUserRepo);
+    MongoUserService mongoUserService = new MongoUserService(mongoUserRepo);
 
     @Test
     void getMongoUserByName() {
@@ -27,7 +27,7 @@ class UserServiceTest {
         MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", null, lastLogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
-        UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);
+        UserDetails actual = mongoUserService.loadUserByUsername(username);
         // THEN
         verify(mongoUserRepo).findMongoUserByUsername(username);
         assertEquals(expected.username(), actual.getUsername());
@@ -43,7 +43,7 @@ class UserServiceTest {
         MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", null, lastLogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
-        MongoUser actual = mongoUserDetailsService.getUserByUsername(username);
+        MongoUser actual = mongoUserService.getUserByUsername(username);
         // THEN
         verify(mongoUserRepo).findMongoUserByUsername(username);
         assertEquals(expected.username(), actual.username());
@@ -60,7 +60,7 @@ class UserServiceTest {
         MongoUser expected = new MongoUser("12345", username, password, "Kevin", "Stupid", lastLogin, newLastLogin);
         when(mongoUserRepo.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
-        MongoUser actual = mongoUserDetailsService.getUserByUsername(username);
+        MongoUser actual = mongoUserService.getUserByUsername(username);
         // THEN
         verify(mongoUserRepo).findMongoUserByUsername(username);
         assertEquals(expected, actual);

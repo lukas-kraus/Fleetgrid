@@ -154,6 +154,11 @@ button.button {
     margin: 0;
 }
 
+div select {
+    margin: 0 0 10px 0;
+
+}
+
 a.chip {
     display: inline-flex;
     align-items: center;
@@ -255,4 +260,14 @@ table .status * {
     font-weight: 600;
     border: 1px solid;
     color: #CCC;
+}
+
+@media only screen and (max-width: 790px) {
+    form {
+        width: 93%;
+    }
+
+    input {
+        width: 100%;
+    }
 }
