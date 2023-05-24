@@ -68,5 +68,5 @@ header a.logout {
 
 header .user:hover .logout {
     width: 60px;
-    margin-left: 15px;
+    margin-left: 5px;
 }
